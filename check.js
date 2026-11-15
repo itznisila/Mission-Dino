@@ -1,0 +1,24 @@
+// Self-check: node check.js index.html. Runs the page script with a stubbed DOM; tests share-link validation and name escaping.
+const fs = require("fs"), assert = require("assert");
+const src = fs.readFileSync(process.argv[2], "utf8").match(/<script>([\s\S]*)<\/script>/)[1];
+function run(hash) {
+  const app = { innerHTML: "" };
+  const ctx = new Function("document", "location", "localStorage", "window", "atob", "btoa",
+    src + "; return { S, esc, SCREENS, render, app: document.getElementById() };");
+  return ctx({ getElementById: () => app, addEventListener() {} }, { hash, href: "x" + hash },
+    { getItem: () => null, setItem() {} }, { scrollY: 0, scrollTo() {} },
+    s => Buffer.from(s, "base64").toString("latin1"), s => Buffer.from(s, "latin1").toString("base64"));
+}
+const b64 = o => "#" + Buffer.from(JSON.stringify(o)).toString("base64");
+// 1. bad IDs fall back, good ones kept, dupes removed, page renders
+let r = run(b64({ scen: "mars", orbit: "nope", power: "x", structure: "vault", inst: ["cam", "zzz", "cam"], launch: "heavy" }));
+assert.deepStrictEqual([r.S.screen, r.S.d.orbit, r.S.d.power, r.S.d.structure, r.S.d.launch, r.S.d.inst], ["design", "low", "solS", "vault", "heavy", ["cam"]]);
+assert.ok(r.app.innerHTML.includes("Mission dashboard"));
+// 2. junk hashes stay on home without crashing
+for (const h of ["#garbage", b64({ scen: "__proto__" }), b64({ scen: "constructor" }), b64({ scen: "earth", inst: "cam" })]) { r = run(h); r.render(); }
+// 3. names are escaped
+r = run("");
+r.S.team = 'A"><b>x'; r.S.players = 2; r.S.names[1] = "<i>";
+r.S.screen = "setup"; r.render();
+assert.ok(r.app.innerHTML.includes('value="A&#34;&#62;&#60;b&#62;x"') && !r.app.innerHTML.includes("<i>"));
+console.log("all checks passed");

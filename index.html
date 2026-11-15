@@ -251,7 +251,8 @@ const EVENTS = [
 let S = { screen: "home", players: 1, names: ["Player 1", "Player 2", "Player 3", "Player 4"], team: "", d: null, events: [], ei: 0, out: null };
 const $app = document.getElementById("app");
 const fmt = n => Math.round(n).toLocaleString();
-const owner = key => { const i = ROLES.findIndex(r => r.owns.includes(key)); return S.players > 1 ? `<span class="badge">${S.names[i % S.players]} · ${ROLES[i].name}</span>` : ""; };
+const esc = s => String(s).replace(/[&<>"']/g, c => `&#${c.charCodeAt(0)};`); // player-typed text goes into innerHTML
+const owner = key => { const i = ROLES.findIndex(r => r.owns.includes(key)); return S.players > 1 ? `<span class="badge">${esc(S.names[i % S.players])} · ${ROLES[i].name}</span>` : ""; };
 const newDesign = scen => ({ scen, orbit: SCEN[scen].orbits[0].id, structure: "std", power: "solS", battery: "batS", computer: "cpu", adcs: "adB", comms: "lga", launch: "med", inst: [] });
 
 function stats(o, capKey) {
@@ -294,10 +295,10 @@ const SCREENS = {
     <div class="card"><h2>Who is on the mission team?</h2>
       <p class="mut">Play alone, or with up to 4 people on one screen. Each player gets a role, owns part of the design, and has their own goal, so you will need to negotiate.</p>
       <div class="row">${[1, 2, 3, 4].map(n => `<button class="btn ${S.players === n ? "sel" : "ghost"}" data-act="players" data-v="${n}">${n} player${n > 1 ? "s" : ""}</button>`).join("")}</div>
-      <div class="row" style="margin-top:14px"><label>Team name <input id="team" value="${S.team}" placeholder="e.g. Team Nova"></label></div>
-      <div class="grid" style="margin-top:14px">${Array.from({ length: S.players }, (_, i) => `<label>Player ${i + 1}<br><input data-name="${i}" value="${S.names[i]}"></label>`).join("")}</div>
+      <div class="row" style="margin-top:14px"><label>Team name <input id="team" value="${esc(S.team)}" placeholder="e.g. Team Nova"></label></div>
+      <div class="grid" style="margin-top:14px">${Array.from({ length: S.players }, (_, i) => `<label>Player ${i + 1}<br><input data-name="${i}" value="${esc(S.names[i])}"></label>`).join("")}</div>
       <h3 style="margin-top:20px">Roles</h3>
-      <table>${ROLES.map((r, i) => `<tr><td><b>${r.name}</b></td><td class="mut">${r.goal}</td><td>${S.players > 1 ? S.names[i % S.players] : "You"}</td></tr>`).join("")}</table>
+      <table>${ROLES.map((r, i) => `<tr><td><b>${r.name}</b></td><td class="mut">${r.goal}</td><td>${S.players > 1 ? esc(S.names[i % S.players]) : "You"}</td></tr>`).join("")}</table>
       <p class="mut">Each role goal met at the end = +50 bonus points.</p>
       <button class="btn" data-act="go" data-v="scen">Next: choose a mission</button>
     </div>`,
@@ -353,7 +354,7 @@ const SCREENS = {
     const ev = S.events[S.ei], d = S.d, months = Math.round(SCEN[d.scen].target.years * 12 * (S.ei + 1) / (S.events.length + 1));
     return `<div class="card"><p class="mut">Mission operations · Month ${months} · Event ${S.ei + 1} of ${S.events.length}</p>
       <h2>${ev.title}</h2><p>${ev.text(d)}</p>
-      ${S.players > 1 ? `<p class="badge" style="margin:0">Decision lead: ${S.names[3 % S.players]} (Comms &amp; Ops). Discuss with the team!</p>` : ""}
+      ${S.players > 1 ? `<p class="badge" style="margin:0">Decision lead: ${esc(S.names[3 % S.players])} (Comms &amp; Ops). Discuss with the team!</p>` : ""}
       ${S.out ? `<div class="card"><p>${S.out}</p></div><button class="btn" data-act="next">Continue →</button>`
       : `<div class="row" style="margin-top:14px"><button class="btn" data-act="choose" data-v="a">${ev.a}</button><button class="btn ghost" data-act="choose" data-v="b">${ev.b}</button></div>`}
     </div>`;
@@ -363,14 +364,14 @@ const SCREENS = {
     const d = S.d, s = SCEN[d.scen], r = finish(d, compute(d));
     const col = r.result === "FULL SUCCESS" ? "#fff" : "var(--mut)";
     saveScore(r.score);
-    return `<div class="card" style="text-align:center"><p class="mut">${s.name} · Mission report${S.team ? " · " + S.team : ""}</p>
+    return `<div class="card" style="text-align:center"><p class="mut">${s.name} · Mission report${S.team ? " · " + esc(S.team) : ""}</p>
       <div class="big" style="color:${col}">${r.result}</div><div class="big">${fmt(r.score)} pts</div>
       <p>Science ${fmt(r.sciFinal)} / ${s.target.sci} (${pct(r.sciR)}) · Lifetime ${r.lifeFinal.toFixed(1)} / ${s.target.years} yr · Cost $${fmt(r.cost)}M / $${s.budget}M</p></div>
       <div class="card"><h3>Why it went this way</h3><ul class="chk">${explain(d, r).map(x => `<li>${mark(x[0])}${x[1]}</li>`).join("")}</ul></div>
       <div class="card"><h3>What happened in operations</h3><ul class="chk">${d.ev.log.map(l => `<li>${mark("")}<b>${l[0]}</b>: ${l[1]}</li>`).join("")}</ul></div>
-      <div class="card"><h3>Team goals (+50 each)</h3><ul class="chk">${ROLES.map((g, i) => `<li>${mark(r.goals[i] ? "ok" : "bad")}${g.name}${S.players > 1 ? " (" + S.names[i % S.players] + ")" : ""}: ${g.goal}</li>`).join("")}</ul></div>
+      <div class="card"><h3>Team goals (+50 each)</h3><ul class="chk">${ROLES.map((g, i) => `<li>${mark(r.goals[i] ? "ok" : "bad")}${g.name}${S.players > 1 ? " (" + esc(S.names[i % S.players]) + ")" : ""}: ${g.goal}</li>`).join("")}</ul></div>
       <div class="card"><h3>Compare with a real NASA mission</h3><p>${s.real}</p><p class="mut">Your spacecraft: ${fmt(r.wet)} kg at launch, ${fmt(r.gen)} W of power at ${s.where}.</p></div>
-      <div class="card"><h3>Best missions on this device (${s.name})</h3><table>${board(d.scen).map((b, i) => `<tr><td>${i + 1}</td><td>${b.n}</td><td>${fmt(b.s)} pts</td></tr>`).join("") || "<tr><td>No scores yet</td></tr>"}</table></div>
+      <div class="card"><h3>Best missions on this device (${s.name})</h3><table>${board(d.scen).map((b, i) => `<tr><td>${i + 1}</td><td>${esc(b.n)}</td><td>${fmt(b.s)} pts</td></tr>`).join("") || "<tr><td>No scores yet</td></tr>"}</table></div>
       <div class="row"><button class="btn" data-act="retry">Change the design and fly again</button><button class="btn ghost" data-act="share">Share this design</button><button class="btn ghost" data-act="go" data-v="scen">New mission</button></div>`;
   }
 };
@@ -449,7 +450,20 @@ document.addEventListener("input", e => {
 function render() { $app.innerHTML = SCREENS[S.screen](); }
 
 // Load a shared design from the URL, if any
-try { if (location.hash.length > 1) { const d = JSON.parse(atob(location.hash.slice(1))); if (SCEN[d.scen]) { S.d = { ...newDesign(d.scen), ...d }; S.screen = "design"; } } } catch {}
+// Only accept IDs that exist; anything unknown falls back to the default design
+try {
+  if (location.hash.length > 1) {
+    const d = JSON.parse(atob(location.hash.slice(1)));
+    if (Object.hasOwn(SCEN, d.scen)) {
+      const base = newDesign(d.scen), has = (list, id) => list.some(x => x.id === id);
+      if (has(SCEN[d.scen].orbits, d.orbit)) base.orbit = d.orbit;
+      PART_KEYS.forEach(k => { if (has(PARTS[k].opts, d[k])) base[k] = d[k]; });
+      if (has(LV, d.launch)) base.launch = d.launch;
+      if (Array.isArray(d.inst)) base.inst = [...new Set(d.inst.filter(i => has(INST, i)))];
+      S.d = base; S.screen = "design";
+    }
+  }
+} catch {}
 render();
 </script>
 </body>
