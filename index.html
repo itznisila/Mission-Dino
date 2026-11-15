@@ -308,7 +308,8 @@ const SCREENS = {
     <div class="grid">${Object.entries(SCEN).map(([k, s]) => `
       <button class="opt" data-act="scen" data-v="${k}"><b>${s.name}</b><span class="badge" style="margin:0;width:max-content">${s.diff}</span>
       <small>${s.goal}</small><span class="st">Budget $${s.budget}M · Science target ${s.target.sci} · ${s.target.years} years</span></button>`).join("")}
-    </div>`,
+    </div>
+    <div class="row" style="margin-top:20px"><button class="btn ghost" data-act="go" data-v="setup">← Back</button></div>`,
 
   design: () => {
     const d = S.d, s = SCEN[d.scen], r = compute(d), o = r.o;
