@@ -8,7 +8,7 @@
 <meta name="ai-assistance" content="Game code written with assistance from an AI model (Claude). Game design, testing and data choices by the team.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--blue:#5aa9ff;--orange:#ff8c42;--gut:clamp(16px,4vw,72px);--top:28px;--bg:#000000;--txt:#ffffff;--mut:#969696;--line:#2b2b2b;--ok:#ffffff;--warn:#969696;--bad:#555555}
+:root{--blue:#5aa9ff;--orange:#ff8c42;--gold:#f2cf9b;--gut:clamp(16px,4vw,72px);--top:28px;--bg:#000000;--txt:#ffffff;--mut:#969696;--line:#2b2b2b;--ok:#5aa9ff;--warn:#f2cf9b;--bad:#ff8c42}
 *{box-sizing:border-box}
 html{background:var(--bg);overflow-x:clip}
 body{margin:0;font-family:"D-DIN","Barlow",Arial,Helvetica,sans-serif;color:var(--txt);min-height:100vh;min-height:100svh;display:flex;flex-direction:column;overflow-x:clip;letter-spacing:.02em;
@@ -24,28 +24,30 @@ button{font:inherit;color:inherit;cursor:pointer}
 .btn.ghost{border-color:var(--mut);color:var(--mut)}.btn.ghost:hover{background:var(--mut);color:#000}
 .btn.sel{background:#fff;color:#000}
 .btn:disabled{opacity:.4;cursor:not-allowed}
-.card{background:transparent;border:1px solid var(--line);border-radius:0;padding:24px;margin:16px 0}
+.card{background:linear-gradient(180deg,#0a1324d9,#03060cd9);border:1px solid #ffffff1a;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-radius:0;padding:clamp(18px,2vw,28px);margin:0 0 clamp(14px,1.6vw,22px)}
 .grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr))}
-.opt{text-align:left;background:#000;border:1px solid var(--line);border-radius:0;padding:16px;display:flex;flex-direction:column;gap:8px;transition:border-color .2s,background .2s}
-.opt:hover{border-color:#fff}
+.opt{text-align:left;background:#ffffff05;border:1px solid #ffffff14;border-radius:0;padding:16px;display:flex;flex-direction:column;gap:8px;transition:border-color .25s,background .25s,box-shadow .25s}
+.opt:hover,.opt:focus-visible{border-color:#5aa9ff80;outline:none}
 .opt b{text-transform:uppercase;letter-spacing:.08em;font-weight:600}
-.opt.on{background:#fff;color:#000;border-color:#fff}.opt.on small,.opt.on .st{color:#444}
+.opt.on{background:#5aa9ff1a;color:#fff;border-color:var(--blue);box-shadow:0 0 0 1px var(--blue),0 12px 36px -20px var(--blue)}.opt.on small{color:#bdbdbd}.opt.on .st{color:#dcecff}
 .opt small{color:var(--mut);line-height:1.45}.st{font-size:.82rem;color:#cfcfcf;letter-spacing:.04em}
 .layout{display:grid;grid-template-columns:minmax(0,1fr) clamp(300px,24vw,440px);gap:24px;align-items:start}
-.dash{position:sticky;top:16px;background:#000}
+.dash{position:sticky;top:16px;background:linear-gradient(180deg,#0a1324,#03060c)}
 .bar{margin:14px 0}.bar .lab{display:flex;justify-content:space-between;font-size:.75rem;color:#cfcfcf}
 .bar .trk{height:4px;background:#1c1c1c;margin-top:6px}
 .bar .fil{height:100%}
-.over{color:#fff;font-weight:700}
+.over{color:var(--orange);font-weight:700}
 .badge{display:inline-block;border:1px solid var(--mut);padding:3px 10px;font-size:.68rem;margin-left:10px;color:var(--mut);vertical-align:middle}
 .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
 .chk{list-style:none;padding:0}.chk li{margin:10px 0;line-height:1.5;padding-left:28px;position:relative}
 .mk{position:absolute;left:0;top:0;width:18px;height:18px;border:1px solid currentColor;font-size:.7rem;display:inline-flex;align-items:center;justify-content:center}
-.mk.ok{background:#fff;color:#000;border-color:#fff}.mk.warn{color:var(--mut)}.mk.bad{color:#fff}
-input{background:#000;border:1px solid var(--mut);color:var(--txt);border-radius:0;padding:10px;font:inherit}
+.mk.ok{background:var(--blue);color:#000;border-color:var(--blue)}.mk.warn{color:var(--gold)}.mk.bad{color:var(--orange)}
+input{background:#050a14;border:1px solid #ffffff33;color:var(--txt);border-radius:0;padding:10px;font:inherit;transition:border-color .25s,box-shadow .25s}
+input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 1px var(--blue)}
+.btn:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
 .kick{color:var(--mut);letter-spacing:.3em;text-transform:uppercase;font-size:.85rem}
 .ship{width:14px;height:90px;background:linear-gradient(#fff 0 80%,#969696 80%);display:inline-block;position:relative;animation:up 2.6s ease-in forwards}
-.ship:after{content:"";position:absolute;left:3px;top:90px;width:8px;height:40px;background:linear-gradient(#fff,transparent);opacity:.8}
+.ship:after{content:"";position:absolute;left:3px;top:90px;width:8px;height:40px;background:linear-gradient(var(--orange),transparent);opacity:.9}
 @keyframes up{0%{transform:translateY(0)}20%{transform:translateY(4px)}100%{transform:translateY(-460px)}}
 .big{font-size:clamp(2rem,6vw,3.6rem);font-weight:700;letter-spacing:.08em;text-transform:uppercase}
 footer{color:var(--mut);font-size:.72rem;text-align:center;padding:30px var(--gut);letter-spacing:.12em;text-transform:uppercase;border-top:1px solid var(--line)}
@@ -64,6 +66,8 @@ main:has(>.dest){display:flex;flex-direction:column}
  radial-gradient(1px 1px at 89% 71%,#fffa,transparent),radial-gradient(1px 1px at 14% 88%,#fff9,transparent),radial-gradient(1px 1px at 58% 92%,#fffb,transparent),
  radial-gradient(1px 1px at 96% 12%,#fff,transparent),radial-gradient(1px 1px at 44% 78%,#fff8,transparent),radial-gradient(1px 1px at 3% 48%,#fffa,transparent)}
 @keyframes twinkle{from{opacity:.45}to{opacity:1}}
+.dest.flow{overflow:clip;justify-content:flex-start}
+@media(max-width:560px){.pcount{display:grid;grid-template-columns:1fr 1fr}}
 .dest-top{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
 .dest-head{max-width:860px}
 .dest-title{font-size:clamp(2rem,5.2vw,4.4rem);font-weight:700;line-height:1.05;letter-spacing:.1em;margin:.2em 0 .35em}
@@ -811,12 +815,19 @@ const apodHTML = () => { const a = APOD || APOD_FALLBACK; return `
   </div>`; };
 function loadApod() {
   if (!window.fetch) return;
-  fetch("https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&thumbs=true").then(r => r.ok ? r.json() : Promise.reject(r.status)).then(d => {
+  const use = d => {
     const img = d.media_type === "image" ? d.url : d.thumbnail_url;
     if (!/^https:\/\//.test(img || "") || !/^\d{4}-\d\d-\d\d$/.test(d.date)) return;
     APOD = { title: d.title, date: d.date, img, explanation: d.explanation, credit: (d.copyright || "NASA").trim(),
       link: `https://apod.nasa.gov/apod/ap${d.date.slice(2).replace(/-/g, "")}.html` };
     const el = document.getElementById("apod"); if (el) el.outerHTML = apodHTML();
+  };
+  // The shared DEMO_KEY is rate-limited, so keep today's picture and reuse it on reloads
+  const today = new Date().toDateString();
+  try { const c = JSON.parse(localStorage.getItem("ma-apod")); if (c && c.day === today) return use(c.d); } catch {}
+  fetch("https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&thumbs=true").then(r => r.ok ? r.json() : Promise.reject(r.status)).then(d => {
+    try { localStorage.setItem("ma-apod", JSON.stringify({ day: today, d })); } catch {}
+    use(d);
   }).catch(() => {});
 }
 
@@ -1001,16 +1012,26 @@ const SCREENS = {
     </div>`,
 
   setup: () => `
-    <div class="card"><h2>Who is on the mission team?</h2>
-      <p class="mut">Play alone, or with up to 4 people on one screen. Each player gets a role, owns part of the design, and has their own goal, so you will need to negotiate.</p>
-      <div class="row">${[1, 2, 3, 4].map(n => `<button class="btn ${S.players === n ? "sel" : "ghost"}" data-act="players" data-v="${n}">${n} player${n > 1 ? "s" : ""}</button>`).join("")}</div>
-      <div class="row" style="margin-top:14px"><label>Team name <input id="team" value="${esc(S.team)}" placeholder="e.g. Team Nova"></label></div>
-      <div class="grid" style="margin-top:14px">${Array.from({ length: S.players }, (_, i) => `<label>Player ${i + 1}<br><input data-name="${i}" value="${esc(S.names[i])}"></label>`).join("")}</div>
-      <h3 style="margin-top:20px">Roles</h3>
-      <table>${ROLES.map((r, i) => `<tr><td><b>${r.name}</b></td><td class="mut">${r.goal}</td><td>${S.players > 1 ? esc(S.names[i % S.players]) : "You"}</td></tr>`).join("")}</table>
-      <p class="mut">Each role goal met at the end = +50 bonus points.</p>
-      <div class="row"><button class="btn ghost" data-act="go" data-v="home">← Back</button><button class="btn" data-act="go" data-v="scen">Next: choose a mission</button></div>
-    </div>`,
+    <section class="dest flow">
+      <div class="dest-top">
+        <header class="dest-head">
+          <div class="kick">Step 01 · Mission team</div>
+          <h2 class="dest-title">Who is on the mission team?</h2>
+          <p class="mut dest-sub">Play alone, or with up to 4 people on one screen. Each player gets a role, owns part of the design, and has their own goal, so you will need to negotiate.</p>
+        </header>
+        <button class="btn ghost" data-act="go" data-v="home">← Back</button>
+      </div>
+      <div class="card">
+        <div class="bh">Crew <b>size</b></div>
+        <div class="row pcount">${[1, 2, 3, 4].map(n => `<button class="btn ${S.players === n ? "sel" : "ghost"}" data-act="players" data-v="${n}">${n} player${n > 1 ? "s" : ""}</button>`).join("")}</div>
+        <div class="row" style="margin-top:18px"><label>Team name <input id="team" value="${esc(S.team)}" placeholder="e.g. Team Nova"></label></div>
+        <div class="grid" style="margin-top:14px">${Array.from({ length: S.players }, (_, i) => `<label>Player ${i + 1}<br><input data-name="${i}" value="${esc(S.names[i])}"></label>`).join("")}</div>
+        <div class="bh" style="margin-top:28px">Mission <b>roles</b></div>
+        <table>${ROLES.map((r, i) => `<tr><td><b>${r.name}</b></td><td class="mut">${r.goal}</td><td>${S.players > 1 ? esc(S.names[i % S.players]) : "You"}</td></tr>`).join("")}</table>
+        <p class="mut">Each role goal met at the end = +50 bonus points.</p>
+        <div class="row"><button class="btn ghost" data-act="go" data-v="home">← Back</button><button class="btn go" data-act="go" data-v="scen">Next: choose a mission →</button></div>
+      </div>
+    </section>`,
 
   scen: () => `
     <section class="dest">
@@ -1252,13 +1273,21 @@ const SCREENS = {
   design: () => {
     const d = S.d, s = SCEN[d.scen], r = compute(d), o = r.o;
     const sec = (key, title, body, help) => `<div class="card"><h3>${title}${owner(key)}</h3>${help ? `<p class="mut">${help}</p>` : ""}<div class="grid">${body}</div></div>`;
-    return `<div class="layout"><div>
-      <div class="card"><h2>${s.name}</h2><p>${s.goal}</p><p class="mut">Budget <b>$${s.budget}M</b> · Science target <b>${s.target.sci}</b> · Lifetime target <b>${s.target.years} years</b></p></div>
+    return `<section class="dest flow">
+      <div class="dest-top">
+        <header class="dest-head">
+          <div class="kick">Step 04 · Spacecraft design · ${s.name}</div>
+          <h2 class="dest-title">Build your spacecraft.</h2>
+          <p class="mut dest-sub">${s.goal} Budget <b>$${s.budget}M</b> · Science target <b>${s.target.sci}</b> · Lifetime target <b>${s.target.years} years</b></p>
+        </header>
+        <button class="btn ghost" data-act="go" data-v="brief">← Briefing</button>
+      </div>
+      <div class="layout"><div>
       ${sec("orbit", "1. Orbit", s.orbits.map(x => card("orbit", x, d.orbit === x.id)).join(""), "Δv is the speed change your spacecraft must make itself with its own fuel once the rocket drops it off.")}
       ${PART_KEYS.map((k, i) => sec(k, `${i + 2}. ${PARTS[k].label}`, PARTS[k].opts.map(x => card(k, x, d[k] === x.id)).join(""))).join("")}
       ${sec("inst", "8. Science instruments (pick any)", INST.map(x => card("inst", x, d.inst.includes(x.id))).join(""), `Science points depend on the target: an instrument great at Jupiter may be weak at Earth. Value here: ${INST.map(i => `${i.name.split(" ")[0]} ${Math.round(i.sci * i.fit[d.scen])}`).join(", ")}.`)}
       ${sec("launch", "9. Launch vehicle", LV.map(x => card("launch", x, d.launch === x.id, o.cap)).join(""))}
-      <div class="row"><button class="btn ghost" data-act="go" data-v="scen">← Change mission</button><button class="btn ghost" data-act="share">Copy share link</button><button class="btn" data-act="go" data-v="review">Launch readiness review →</button></div>
+      <div class="row"><button class="btn ghost" data-act="go" data-v="scen">← Change mission</button><button class="btn ghost" data-act="share">Copy share link</button><button class="btn go" data-act="go" data-v="review">Launch readiness review →</button></div>
     </div>
     <div class="dash card"><h3>Mission dashboard</h3>
       ${bar("Mass vs rocket limit", r.wet, r.cap, v => fmt(v) + " kg")}
@@ -1270,7 +1299,7 @@ const SCREENS = {
       ${bar("Lifetime", r.life, s.target.years, v => v.toFixed(1) + " yr", true)}
       ${bar("Expected science", r.sci, s.target.sci, v => fmt(v), true)}
       <p class="mut" style="font-size:.85rem">${tip(d, r)}</p>
-    </div></div>`;
+    </div></div></section>`;
   },
 
   review: () => {
@@ -1281,13 +1310,28 @@ const SCREENS = {
     else if (r.wet > r.cap) blockers.push(`Too heavy: ${fmt(r.wet)} kg, but the rocket can only lift ${fmt(r.cap)} kg there. Remove mass or use a bigger rocket. Remember, every extra kg also needs extra fuel.`);
     if (r.cost > s.budget) blockers.push(`Over budget: $${fmt(r.cost)}M vs $${s.budget}M. The review board will not approve this.`);
     explain(d, r).filter(x => x[0] !== "ok").forEach(x => warns.push(x[1]));
-    return `<div class="card"><h2>‍Launch readiness review</h2>
-      ${blockers.length ? `<h3 >Not ready to launch</h3><ul class="chk">${blockers.map(b => `<li>${mark("bad")}${b}</li>`).join("")}</ul>` : `<h3 >Cleared for launch</h3>`}
-      ${warns.length ? `<h3 class="mut">Risks the review board noticed</h3><ul class="chk">${warns.map(w => `<li>${mark("warn")}${w}</li>`).join("")}</ul>` : ""}
-      <div class="row"><button class="btn ghost" data-act="go" data-v="design">← Back to design</button>${blockers.length ? "" : `<button class="btn" data-act="launch">Launch! </button>`}</div></div>`;
+    return `<section class="dest flow">
+      <div class="dest-top">
+        <header class="dest-head rise">
+          <div class="kick">Step 05 · Launch readiness review</div>
+          <h2 class="dest-title">${blockers.length ? "Not ready to launch." : "Cleared for launch."}</h2>
+          <p class="mut dest-sub">${s.name} · ${s.where}. The review board checks instruments, rocket, mass and budget before any launch.</p>
+        </header>
+        <button class="btn ghost rise" style="--i:1" data-act="go" data-v="design">← Back to design</button>
+      </div>
+      <div class="card rise" style="--i:2">
+        ${blockers.length ? `<div class="bh">Blocking <b>issues</b></div><ul class="chk">${blockers.map(b => `<li>${mark("bad")}${b}</li>`).join("")}</ul>` : `<div class="bh">Review <b>passed</b></div><ul class="chk"><li>${mark("ok")}Every launch requirement is met.</li></ul>`}
+        ${warns.length ? `<div class="bh" style="margin-top:24px">Risks the board <b>noticed</b></div><ul class="chk">${warns.map(w => `<li>${mark("warn")}${w}</li>`).join("")}</ul>` : ""}
+        <div class="row" style="margin-top:20px"><button class="btn ghost" data-act="go" data-v="design">← Back to design</button>${blockers.length ? "" : `<button class="btn go" data-act="launch">Launch →</button>`}</div>
+      </div>
+    </section>`;
   },
 
-  launch: () => `<div class="card" style="text-align:center;min-height:480px;overflow:hidden"><h2>T-0: Liftoff!</h2><div style="margin-top:300px"><span class="ship"></span></div><p class="mut">Cruising to ${SCEN[S.d.scen].where}...</p></div>`,
+  launch: () => `
+    <section class="dest flow">
+      <div class="dest-top"><header class="dest-head rise"><div class="kick">T-0 · Liftoff</div><h2 class="dest-title">Liftoff!</h2><p class="mut dest-sub">Cruising to ${SCEN[S.d.scen].where}...</p></header></div>
+      <div class="card" style="text-align:center;min-height:440px;overflow:hidden"><div style="margin-top:290px"><span class="ship"></span></div></div>
+    </section>`,
 
   ops: () => {
     const ev = S.events[S.ei], d = S.d, k = d.scen, s = SCEN[k], r = compute(d), e = d.ev, w = WORLDS.find(x => x.n.toLowerCase() === k);
