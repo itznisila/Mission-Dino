@@ -37,4 +37,5 @@ for (let i = 0; i < r.S.events.length; i++) {
   r.ACT.next();
 }
 assert.strictEqual(r.S.screen, "report"); assert.strictEqual(r.S.d.ev.log.length, r.S.events.length);
+r.render(); assert.ok(/Mission report[\s\S]*(FULL SUCCESS|PARTIAL SUCCESS|MISSION FAILED)/.test(r.app.innerHTML) && r.app.innerHTML.includes(r.S.d.ev.log[0][1]));
 console.log("all checks passed");

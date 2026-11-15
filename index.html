@@ -358,6 +358,79 @@ button.stag:hover{background:var(--blue);color:#000}
 @media(max-width:1100px){.cgrid{grid-template-columns:1fr}.cstatus{grid-template-columns:repeat(2,minmax(0,1fr))}.cprogress{grid-template-columns:1fr}}
 @media(max-width:640px){.cstatus,.cacts,.cdash{grid-template-columns:1fr}.cout{grid-template-columns:1fr}.cmini{grid-template-columns:1fr}.cnav,.cnav .row{flex-direction:column;align-items:stretch}.cnav .btn{width:100%}.chud.tr{display:none}}
 @media(prefers-reduced-motion:reduce){.corbit i,.cchip::before{animation:none}.cact{transition:none}}
+/* ---------- Mission report ---------- */
+.rep{--res:var(--blue);justify-content:flex-start}
+.rep.partial{--res:#f2cf9b}.rep.failed{--res:var(--orange)}
+.rep .dest-title{color:#fff}.rep .kick b{color:var(--res);font-weight:600}
+.rgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,1.6vw,22px)}
+.rgrid>.wide{grid-column:1/-1}
+.rhero{position:relative;isolation:isolate;overflow:hidden;min-height:clamp(340px,52vh,560px);display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(22px,3vw,48px);
+ border:1px solid color-mix(in srgb,var(--res) 45%,transparent);background:#01030a;box-shadow:0 0 80px -40px var(--res)}
+.rhero .rplanet{position:absolute;z-index:-3;right:-6%;top:50%;translate:0 -50%;height:130%;aspect-ratio:1;display:grid;place-items:center}
+.rhero .rplanet img{width:100%;height:100%;object-fit:contain;mix-blend-mode:screen;animation:drift 70s ease-in-out infinite alternate;
+ -webkit-mask-image:radial-gradient(circle closest-side,#000 95%,transparent 100%);mask-image:radial-gradient(circle closest-side,#000 95%,transparent 100%)}
+.rhero .rplanet .planet{display:none;height:70%}.rhero .rplanet.nofoto .planet{display:block}
+.m-jupiter .rplanet img{filter:contrast(1.45) brightness(.92)}
+.rhero::before{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,#000 0%,#000d 32%,#0006 60%,transparent 85%),linear-gradient(0deg,#000c,transparent 45%)}
+.rhero::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse 50% 70% at 78% 50%,color-mix(in srgb,var(--res) 16%,transparent),transparent 70%),
+ radial-gradient(1px 1px at 12% 22%,#fffa,transparent),radial-gradient(1px 1px at 34% 12%,#fff8,transparent),radial-gradient(1px 1px at 52% 30%,#fff7,transparent),radial-gradient(1px 1px at 22% 48%,#fff6,transparent)}
+.rbadge{align-self:flex-start;display:inline-flex;align-items:center;gap:10px;padding:9px 16px;border:1px solid var(--res);color:var(--res);font-size:.72rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;box-shadow:0 0 24px -8px var(--res)}
+.rbadge::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor;box-shadow:0 0 10px currentColor}
+.rresult{margin:18px 0 6px;font-size:clamp(2.4rem,6vw,5.4rem);font-weight:700;line-height:.95;letter-spacing:.06em;text-transform:uppercase;color:var(--res);text-shadow:0 0 40px color-mix(in srgb,var(--res) 40%,transparent)}
+.rmeta{display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:14px;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:#cfcfcf}
+.rmeta span em{font-style:normal;color:var(--mut);margin-right:8px}
+.rscore{position:absolute;top:clamp(22px,3vw,40px);right:clamp(22px,3vw,40px);text-align:right}
+.rscore em{display:block;font-style:normal;font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--mut)}
+.rscore b{display:block;font-size:clamp(2.4rem,5vw,4.4rem);line-height:1;letter-spacing:.02em}
+.rscore small{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--res)}
+.rperf{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(12px,1.4vw,18px)}
+.rperf div{padding:clamp(16px,1.8vw,24px);border:1px solid #ffffff14;background:linear-gradient(180deg,#0a1324d9,#03060cd9)}
+.rperf em{display:block;font-style:normal;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mut)}
+.rperf b{display:block;margin:8px 0 4px;font-size:clamp(1.6rem,2.8vw,2.6rem);line-height:1;letter-spacing:.03em}
+.rperf small{color:var(--mut);font-size:.78rem}
+.rperf .hit b{color:var(--blue)}.rperf .miss b{color:var(--orange)}
+.rach{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.rach div{display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px;align-items:center;padding:12px 14px;border:1px solid #ffffff14;background:#ffffff04}
+.rach i{display:grid;place-items:center;width:40px;height:40px;border:1px solid #ffffff2e;font-style:normal;font-weight:700;color:var(--mut)}
+.rach b{display:block;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase}
+.rach small{color:var(--mut);font-size:.76rem;line-height:1.4}
+.rach.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.rach .on{border-color:#5aa9ff59;background:linear-gradient(90deg,#5aa9ff14,transparent)}
+.rach .on i{border-color:var(--blue);background:var(--blue);color:#000;box-shadow:0 0 16px -2px var(--blue)}
+.rach .off{opacity:.55}
+.rrate{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}
+.rrate div{padding:12px 14px;border:1px solid #ffffff14;text-align:center}
+.rrate em{display:block;font-style:normal;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}
+.rrate b{display:block;margin-top:4px;font-size:1.6rem;letter-spacing:.04em}
+.rchart{display:grid;gap:16px}
+.rbar{display:grid;gap:6px}
+.rbar .lab{display:flex;justify-content:space-between;gap:12px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#cfcfcf}
+.rbar .lab span:last-child{letter-spacing:.04em;text-transform:none;color:#fff;font-weight:600}
+.rbar .trk{position:relative;height:10px;background:#ffffff0f;border:1px solid #ffffff14}
+.rbar .fil{position:absolute;inset:0;width:var(--w);background:linear-gradient(90deg,#5aa9ff66,var(--blue));box-shadow:0 0 12px #5aa9ff80;animation:grow 1.2s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:.4s}
+.rbar.bad .fil{background:linear-gradient(90deg,#ff8c4266,var(--orange));box-shadow:0 0 12px #ff8c4280}
+.rbar .tgt{position:absolute;top:-5px;bottom:-5px;left:var(--t);width:2px;background:#fff;box-shadow:0 0 8px #fff}
+.rbar small{color:var(--mut);font-size:.72rem}
+@keyframes grow{from{width:0}}
+.rlegend{display:flex;gap:18px;margin-top:4px;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mut)}
+.rlegend span::before{content:"";display:inline-block;width:14px;height:6px;margin-right:8px;background:var(--blue);vertical-align:middle}
+.rlegend span.t::before{width:2px;height:12px;background:#fff}
+.rsum{margin:0 0 16px;font-size:clamp(1.05rem,1.4vw,1.25rem);line-height:1.6;color:#e6e6e6}
+.rfinal{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(16px,2.4vw,36px)}
+.rlog{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+.rlog li{padding:12px 14px;border:1px solid #ffffff12;border-left:2px solid var(--blue);background:#ffffff04;color:#cfcfcf;font-size:.88rem;line-height:1.5}
+.rlog li b{display:block;color:#fff;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase}
+.rwhy{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.rwhy li{position:relative;padding-left:26px;color:#cfcfcf;font-size:.88rem;line-height:1.5}
+.rwhy li::before{content:"✓";position:absolute;left:0;top:1px;width:16px;height:16px;display:grid;place-items:center;font-size:.6rem;border:1px solid var(--blue);color:var(--blue)}
+.rwhy li.warn::before{content:"!";border-color:#f2cf9b;color:#f2cf9b}.rwhy li.bad::before{content:"✕";border-color:var(--orange);color:var(--orange)}
+.rboard{width:100%;border-collapse:collapse}.rboard td{padding:10px 8px;border-bottom:1px solid #ffffff12}.rboard td:first-child{width:36px;color:var(--blue);font-weight:700}.rboard td:last-child{text-align:right;font-weight:600}
+.rboard tr.me td{color:var(--res)}
+.racts{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+@media(max-width:1100px){.rperf{grid-template-columns:repeat(2,minmax(0,1fr))}.rgrid,.rfinal{grid-template-columns:1fr}.rach{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.rach.two{grid-template-columns:1fr}.rhero{min-height:460px;justify-content:flex-end}.rhero .rplanet{right:50%;translate:50% 0;top:6%;height:60%}.rhero::before{background:linear-gradient(0deg,#000 0 42%,#0008 70%,transparent)}
+ .rscore{position:static;text-align:left;margin-bottom:14px}.rperf,.rach,.rrate{grid-template-columns:1fr}.racts,.racts .row{flex-direction:column;align-items:stretch}.racts .btn{width:100%}}
+@media(prefers-reduced-motion:reduce){.rhero .rplanet img,.rbar .fil{animation:none}}
 @media(max-width:860px){.layout{grid-template-columns:1fr}.dash{position:static}}
 </style>
 </head>
@@ -997,18 +1070,95 @@ const SCREENS = {
   },
 
   report: () => {
-    const d = S.d, s = SCEN[d.scen], r = finish(d, compute(d));
-    const col = r.result === "FULL SUCCESS" ? "#fff" : "var(--mut)";
+    const d = S.d, k = d.scen, s = SCEN[k], r = finish(d, compute(d)), w = WORLDS.find(x => x.n.toLowerCase() === k);
     saveScore(r.score);
-    return `<div class="card" style="text-align:center"><p class="mut">${s.name} · Mission report${S.team ? " · " + esc(S.team) : ""}</p>
-      <div class="big" style="color:${col}">${r.result}</div><div class="big">${fmt(r.score)} pts</div>
-      <p>Science ${fmt(r.sciFinal)} / ${s.target.sci} (${pct(r.sciR)}) · Lifetime ${r.lifeFinal.toFixed(1)} / ${s.target.years} yr · Cost $${fmt(r.cost)}M / $${s.budget}M</p></div>
-      <div class="card"><h3>Why it went this way</h3><ul class="chk">${explain(d, r).map(x => `<li>${mark(x[0])}${x[1]}</li>`).join("")}</ul></div>
-      <div class="card"><h3>What happened in operations</h3><ul class="chk">${d.ev.log.map(l => `<li>${mark("")}<b>${l[0]}</b>: ${l[1]}</li>`).join("")}</ul></div>
-      <div class="card"><h3>Team goals (+50 each)</h3><ul class="chk">${ROLES.map((g, i) => `<li>${mark(r.goals[i] ? "ok" : "bad")}${g.name}${S.players > 1 ? " (" + esc(S.names[i % S.players]) + ")" : ""}: ${g.goal}</li>`).join("")}</ul></div>
-      <div class="card"><h3>Compare with a real NASA mission</h3><p>${s.real}</p><p class="mut">Your spacecraft: ${fmt(r.wet)} kg at launch, ${fmt(r.gen)} W of power at ${s.where}.</p></div>
-      <div class="card"><h3>Best missions on this device (${s.name})</h3><table>${board(d.scen).map((b, i) => `<tr><td>${i + 1}</td><td>${esc(b.n)}</td><td>${fmt(b.s)} pts</td></tr>`).join("") || "<tr><td>No scores yet</td></tr>"}</table></div>
-      <div class="row"><button class="btn" data-act="retry">Change the design and fly again</button><button class="btn ghost" data-act="share">Share this design</button><button class="btn ghost" data-act="go" data-v="scen">New mission</button></div>`;
+    const tier = { "FULL SUCCESS": ["", "Mission accomplished.", "Operation complete"], "PARTIAL SUCCESS": ["partial", "Mission partly accomplished.", "Partial objectives met"], "MISSION FAILED": ["failed", "Mission lost.", "Objectives not met"] }[r.result];
+    const left = s.budget - r.cost, objs = [r.sciR >= 1, r.lifeR >= 1, left >= 0], done = objs.filter(Boolean).length, goals = r.goals.filter(Boolean).length;
+    const best = board(k), top = best.length && best[0].s === r.score;
+    const bars = [ // actual vs target, all from compute()/finish()
+      ["Science", r.sciFinal, s.target.sci, v => fmt(v) + " pts", true],
+      ["Lifetime", r.lifeFinal, s.target.years, v => v.toFixed(1) + " yrs", true],
+      ["Cost", r.cost, s.budget, v => "$" + fmt(v) + "M", false],
+      ["Launch mass", r.wet, r.cap, v => fmt(v) + " kg", false],
+      ["Power made", r.gen, r.use, v => fmt(v) + " W", true],
+      ["Data link", r.link, r.data, v => v.toFixed(1) + " Gb/day", true]
+    ];
+    const ach = ([t, ok, sub]) => `<div class="${ok ? "on" : "off"}"><i>${ok ? "✓" : "–"}</i><span><b>${t}</b><small>${sub}</small></span></div>`;
+    const bar = ([t, v, tg, f, hi]) => { const m = Math.max(v, tg, 1e-9) * 1.15, ok = hi ? v >= tg : v <= tg;
+      return `<div class="rbar${ok ? "" : " bad"}"><div class="lab"><span>${t}</span><span>${f(v)} / ${f(tg)}</span></div>
+        <div class="trk"><div class="fil" style="--w:${v / m * 100}%"></div><span class="tgt" style="--t:${tg / m * 100}%"></span></div><small>${hi ? "Target: at least" : "Limit:"} ${f(tg)}</small></div>`; };
+    const summary = `${S.team ? esc(S.team) + "'s" : "Your"} ${s.name} mission ${r.result === "FULL SUCCESS" ? "met its science and lifetime goals" : r.result === "PARTIAL SUCCESS" ? "returned useful results but fell short of its goals" : "did not return enough science or did not last long enough"}: ${fmt(r.sciFinal)} of ${s.target.sci} science points (${pct(r.sciR)}) over ${r.lifeFinal.toFixed(1)} of ${s.target.years} years, for $${fmt(r.cost)}M of a $${s.budget}M budget.`;
+    return `
+    <section class="dest rep ${tier[0]}">
+      <div class="dest-top">
+        <header class="dest-head rise">
+          <div class="kick">Mission report · <b>${tier[2]}</b></div>
+          <h2 class="dest-title">${tier[1]}</h2>
+        </header>
+      </div>
+      <div class="rgrid">
+        <article class="rhero wide m-${k} rise" style="--i:1">
+          <div class="rplanet"><span class="planet" aria-hidden="true"></span>${pic(planetImg(k), `${w.n}, NASA photograph`, "large")}</div>
+          <div class="rscore"><em>Final score</em><b>${fmt(r.score)}</b><small>points${top ? " · best on this device" : ""}</small></div>
+          <span class="rbadge">${r.result === "MISSION FAILED" ? "Mission failure" : r.result === "FULL SUCCESS" ? "Mission success" : "Partial success"}</span>
+          <div class="rresult">${r.result}</div>
+          <div class="rmeta"><span><em>Mission</em>${s.name}</span><span><em>Destination</em>${s.where}</span><span><em>Status</em>${S.events.length} of ${S.events.length} events resolved</span>${S.team ? `<span><em>Team</em>${esc(S.team)}</span>` : ""}</div>
+        </article>
+
+        <div class="wide rperf rise" style="--i:2">
+          <div class="${r.sciR >= 1 ? "hit" : "miss"}"><em>Total science</em><b>${fmt(r.sciFinal)}</b><small>of ${s.target.sci} target · ${pct(r.sciR)}</small></div>
+          <div class="${left >= 0 ? "hit" : "miss"}"><em>Remaining budget</em><b>${left < 0 ? "−" : ""}$${fmt(Math.abs(left))}M</b><small>spent $${fmt(r.cost)}M of $${s.budget}M</small></div>
+          <div class="${done === 3 ? "hit" : "miss"}"><em>Objectives completed</em><b>${done} / 3</b><small>team goals ${goals} / ${ROLES.length}</small></div>
+          <div class="${r.lifeR >= 1 ? "hit" : "miss"}"><em>Mission duration</em><b>${r.lifeFinal.toFixed(1)} yrs</b><small>of ${s.target.years} planned</small></div>
+        </div>
+
+        <article class="bpanel rise" style="--i:3">
+          <div class="bh">Achievements <b>earned</b></div>
+          <div class="bsub" style="margin-top:0">Mission objectives</div>
+          <div class="rach">${[["Science target", r.sciR >= 1, `${pct(r.sciR)} of the target returned`], ["Mission lifetime", r.lifeR >= 1, `${r.lifeFinal.toFixed(1)} of ${s.target.years} years`], ["On budget", left >= 0, left >= 0 ? `$${fmt(left)}M to spare` : `$${fmt(-left)}M over`]].map(ach).join("")}</div>
+          <div class="bsub">Team goals · +50 each</div>
+          <div class="rach two">${ROLES.map((g, i) => [g.name + (S.players > 1 ? ` (${esc(S.names[i % S.players])})` : ""), r.goals[i], g.goal]).map(ach).join("")}</div>
+          <div class="bsub">Performance ratings</div>
+          <div class="rrate">
+            <div><em>Science</em><b>${pct(Math.min(r.sciR, 1.3) / 1.3)}</b></div>
+            <div><em>Lifetime</em><b>${pct(r.lifeR)}</b></div>
+            <div><em>Budget saved</em><b>${pct(Math.max(0, left / s.budget))}</b></div>
+          </div>
+          <p class="brule">Score = science (up to 500) + lifetime (300) + budget left (200) + 50 per team goal.</p>
+        </article>
+
+        <article class="bpanel rise" style="--i:4">
+          <div class="bh">Mission <b>statistics</b></div>
+          <div class="rchart">${bars.filter(b => b[2]).map(bar).join("")}</div>
+          <div class="rlegend"><span>Actual</span><span class="t">Target or limit</span></div>
+        </article>
+
+        <article class="bpanel wide rise" style="--i:5">
+          <div class="bh">Final <b>report</b></div>
+          <p class="rsum">${summary}</p>
+          <div class="rfinal">
+            <div><div class="bsub" style="margin-top:0">What happened in operations</div>
+              <ol class="rlog">${d.ev.log.map(l => `<li><b>${l[0]}</b>${l[1]}</li>`).join("")}</ol>
+              <div class="bsub">Compare with a real NASA mission</div>
+              <p class="breal">${s.real}</p><p class="mut" style="margin:10px 0 0;font-size:.88rem">Your spacecraft: ${fmt(r.wet)} kg at launch, ${fmt(r.gen)} W of power at ${s.where}.</p></div>
+            <div><div class="bsub" style="margin-top:0">Why it went this way</div>
+              <ul class="rwhy">${explain(d, r).map(x => `<li class="${x[0]}">${x[1]}</li>`).join("")}</ul>
+              <div class="bsub">Best missions on this device · ${s.name}</div>
+              <table class="rboard">${best.map((b, i) => `<tr class="${b.s === r.score ? "me" : ""}"><td>${i + 1}</td><td>${esc(b.n)}</td><td>${fmt(b.s)} pts</td></tr>`).join("") || "<tr><td></td><td>No scores yet</td><td></td></tr>"}</table></div>
+          </div>
+        </article>
+
+        <nav class="bpanel wide b-act racts rise" aria-label="Next steps" style="--i:6">
+          <div><h3>What's next?</h3><p>Tweak your design and fly the same mission again, or try a different world.</p></div>
+          <div class="row">
+            <button class="btn ghost" data-act="go" data-v="home">Return home</button>
+            <button class="btn ghost" data-act="share">Share design</button>
+            <button class="btn" data-act="go" data-v="scen">Choose another mission</button>
+            <button class="btn go" data-act="retry">Play again →</button>
+          </div>
+        </nav>
+      </div>
+    </section>`;
   }
 };
 
