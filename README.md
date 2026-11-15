@@ -4,7 +4,7 @@
 
 ![Mission Dino landing page](docs/landing.png)
 
-**Presentation:** [7-slide project demo (PDF)](docs/Mission-Dino-presentation.pdf)
+**Play it:** https://itznisila.github.io/Mission-Dino/ · **Presentation:** [7-slide project demo (PDF)](docs/Mission-Dino-presentation.pdf)
 
 ## What it is
 

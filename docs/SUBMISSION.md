@@ -18,7 +18,9 @@ https://github.com/itznisila/Mission-Dino/blob/main/docs/Mission-Dino-presentati
 
 ## Project
 
-https://github.com/itznisila/Mission-Dino
+https://itznisila.github.io/Mission-Dino/
+
+The game runs there in any browser. The code is at https://github.com/itznisila/Mission-Dino.
 
 ## Project Details
 
