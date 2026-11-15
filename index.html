@@ -514,6 +514,40 @@ button.stag:hover{background:var(--blue);color:#000}
  .xgal{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:560px){.xplanets{grid-template-columns:repeat(2,minmax(0,1fr))}.xfactgrid,.xmore,.xgal{grid-template-columns:1fr}.xgal a:first-child{grid-column:auto;grid-row:span 2}.xfacts{grid-template-columns:repeat(2,minmax(0,1fr))}.xsizes span{font-size:.5rem;letter-spacing:.06em}}
 @media(prefers-reduced-motion:reduce){.xfeat-vis img,.xdetail{animation:none}.xp,.xmore>*{transition:none}}
+/* ---------- Space news ---------- */
+.news{justify-content:flex-start}
+.ntop{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:clamp(14px,1.6vw,22px)}
+.nfeat{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;gap:14px;min-height:clamp(420px,64vh,680px);padding:clamp(22px,3vw,48px);border:1px solid #ffffff1f;color:#fff;text-decoration:none;
+ transition:border-color .4s,box-shadow .4s}
+.nfeat.ph img{z-index:-2}
+.nfeat::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#0000 25%,#000c 65%,#000)}
+.nfeat:hover,.nfeat:focus-visible{border-color:#5aa9ff80;box-shadow:0 0 0 1px #5aa9ff4d,0 30px 80px -40px var(--blue);outline:none}
+.nfeat:hover img,.nside a:hover img,.ngrid2 a:hover img{transform:scale(1.05)}
+.nfeat h3{margin:0;max-width:900px;font-size:clamp(1.8rem,4vw,3.6rem);line-height:1.05;letter-spacing:.06em}
+.nfeat p{margin:0;max-width:720px;color:#d4d4d4;font-size:clamp(1rem,1.2vw,1.15rem)}
+.nfeat .xtag{border-color:var(--blue);color:var(--blue)}
+.nside{display:grid;grid-template-rows:1fr 1fr;gap:clamp(14px,1.6vw,22px)}
+.nside a,.ngrid2 a{display:flex;flex-direction:column;border:1px solid #ffffff14;background:#050505;color:#fff;text-decoration:none;transition:translate .4s,border-color .4s}
+.nside a:hover,.ngrid2 a:hover,.nside a:focus-visible,.ngrid2 a:focus-visible{translate:0 -4px;border-color:#ffffff40;outline:none}
+.nside .ph{flex:1;min-height:150px}
+.ngrid2 .ph{aspect-ratio:16/10}
+.nside .nbody,.ngrid2 .nbody{gap:10px;flex:0}
+.nside h3,.ngrid2 h3{font-size:clamp(1rem,1.2vw,1.15rem);line-height:1.3;letter-spacing:.05em;margin:0}
+.ngrid2 .nbody{flex:1}
+.ngrid2 p{margin:0;flex:1;color:#bdbdbd;font-size:.9rem;line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.nread{display:inline-flex;align-items:center;gap:10px;font-size:.7rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#fff}
+.nread span{transition:transform .3s}a:hover .nread span{transform:translateX(5px)}
+.nfeed{margin-top:clamp(40px,7vh,80px)}
+.ngrid2{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,1.6vw,22px)}
+.nskel{min-height:340px;border:1px solid #ffffff12;background:linear-gradient(100deg,#ffffff05 30%,#ffffff12 50%,#ffffff05 70%) 0 0/300% 100%;animation:shimmer 1.6s linear infinite}
+@keyframes shimmer{to{background-position:-150% 0}}
+.nmore{display:flex;justify-content:center;align-items:center;gap:16px;flex-wrap:wrap;margin-top:clamp(18px,2.4vh,28px)}
+.nmore small{color:var(--mut);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase}
+.nempty{padding:24px;border:1px dashed #ffffff26;color:var(--mut);text-align:center}
+.nsrc{margin:clamp(28px,4vh,44px) 0 0;color:var(--mut);font-size:.8rem;text-align:center}
+@media(max-width:1100px){.ntop{grid-template-columns:1fr}.nside{grid-template-rows:none;grid-template-columns:repeat(2,minmax(0,1fr))}.ngrid2{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.nside,.ngrid2{grid-template-columns:1fr}.nfeat{min-height:440px}}
+@media(prefers-reduced-motion:reduce){.nskel{animation:none}}
 @media(max-width:860px){.layout{grid-template-columns:1fr}.dash{position:static}}
 </style>
 </head>
@@ -848,6 +882,44 @@ const planetDetail = () => { const p = PLANETS.find(x => x.k === S.planet) || PL
     </div>
   </article>`; };
 
+// ---------- Space news: curated stories + live feeds from the NASA Image and Video Library API ----------
+const FEEDS = {
+  discoveries: { t: "Latest discoveries", kick: "01 · Latest discoveries", q: "center=JPL&year_start=2024", note: "New results and images released by NASA's Jet Propulsion Laboratory." },
+  missions: { t: "Mission updates", kick: "02 · Mission updates", q: "q=spacecraft&year_start=2025", note: "Spacecraft, crews and launches across NASA centers." },
+  science: { t: "Space science", kick: "03 · Space science", q: "q=telescope&year_start=2024", note: "Telescopes and the astronomy they make possible." }
+};
+const FEED = {}; // per feed: { items, shown, page, total, loading, error }
+const NEWS_STEP = 6, newsDate = d => new Date(d).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
+function loadFeed(k) {
+  const f = FEED[k] ||= { items: [], shown: 0, page: 0, total: Infinity, loading: false, error: false };
+  if (f.loading || !window.fetch) return;
+  if (f.items.length >= f.shown + NEWS_STEP || f.page * 100 >= f.total) { f.shown += NEWS_STEP; return paintFeed(k); }
+  f.loading = true; f.error = false; paintFeed(k);
+  fetch(`https://images-api.nasa.gov/search?${FEEDS[k].q}&media_type=image&page_size=100&page=${f.page + 1}`).then(r => r.ok ? r.json() : Promise.reject(r.status)).then(j => {
+    f.page++; f.total = j.collection.metadata.total_hits;
+    const seen = new Set(Object.values(FEED).flatMap(x => x.items.map(i => i.title.toLowerCase())));
+    const fresh = j.collection.items.map(i => ({ ...i.data[0], href: (i.links || [])[0]?.href || "" }))
+      .filter(x => x.title && / /.test(x.title.trim()) && /^https:\/\/images-assets\.nasa\.gov\//.test(x.href) && !seen.has(x.title.trim().toLowerCase()) && seen.add(x.title.trim().toLowerCase()))
+      .sort((a, b) => b.date_created.localeCompare(a.date_created));
+    f.items.push(...fresh); f.shown += NEWS_STEP;
+  }).catch(() => { f.error = true; }).finally(() => { f.loading = false; paintFeed(k); });
+}
+const paintFeed = k => { const el = document.getElementById("nf-" + k); if (el) el.outerHTML = feedHTML(k); };
+const feedHTML = k => {
+  const f = FEED[k] || { items: [], shown: 0, loading: true }, list = f.items.slice(0, f.shown), more = f.items.length > f.shown || f.page * 100 < f.total;
+  return `<div id="nf-${k}">
+    <div class="ngrid2">${list.map(x => `
+      <a href="https://images.nasa.gov/details/${encodeURIComponent(x.nasa_id)}" target="_blank" rel="noopener">
+        <div class="ph"><img src="${esc(x.href.replace(/ /g, "%20"))}" alt="" loading="lazy" decoding="async" onerror="this.remove()"></div>
+        <div class="nbody"><div class="nmeta"><b>${FEEDS[k].t}</b><span>${newsDate(x.date_created)}</span>${x.center ? `<span>${esc(x.center)}</span>` : ""}</div>
+          <h3>${esc(x.title.trim())}</h3><p>${esc(String(x.description || "").replace(/<[^>]*>/g, " "))}</p><span class="nread">Read more <span aria-hidden="true">→</span></span></div>
+      </a>`).join("")}${f.loading ? '<div class="nskel"></div>'.repeat(list.length ? 3 : NEWS_STEP) : ""}</div>
+    ${f.error ? `<div class="nempty">Couldn't reach the NASA Image and Video Library. <button class="btn sm" data-act="more" data-v="${k}">Try again</button></div>`
+      : !f.loading && !list.length && window.fetch ? `<div class="nempty">No stories found right now.</div>` : ""}
+    ${list.length && !f.error ? `<div class="nmore"><small>Showing ${list.length}${f.total < Infinity ? ` of ${fmt(f.total)} NASA items` : ""}</small>${more && !f.loading ? `<button class="btn" data-act="more" data-v="${k}">Load more</button>` : ""}</div>` : ""}
+  </div>`;
+};
+
 // ---------- Screens ----------
 const SCREENS = {
   home: () => `
@@ -857,7 +929,7 @@ const SCREENS = {
           onerror="if(!this.dataset.r){this.dataset.r=1;this.src=this.src.replace('~orig','~large')}else{this.parentNode.classList.add('nofoto');this.remove()}"></div>
         <nav class="lnav rise" aria-label="Home">
           <span class="brand"><i aria-hidden="true"></i>Mission Dino</span>
-          <div class="lnav-links">${[["l-missions", "Missions"], ["l-solar", "Solar system"], ["l-news", "Discoveries"], ["l-apod", "Image of the day"]].map(([id, t]) => `<button data-act="jump" data-v="${id}">${t}</button>`).join("")}<button data-act="go" data-v="explore">Explore space</button></div>
+          <div class="lnav-links">${[["l-missions", "Missions"], ["l-solar", "Solar system"], ["l-news", "Discoveries"], ["l-apod", "Image of the day"]].map(([id, t]) => `<button data-act="jump" data-v="${id}">${t}</button>`).join("")}<button data-act="go" data-v="explore">Explore space</button><button data-act="go" data-v="news">News</button></div>
           <button class="btn sm" data-act="go" data-v="setup">Play</button>
         </nav>
         <div class="lhero-copy">
@@ -899,7 +971,7 @@ const SCREENS = {
 
       <section class="lsec glow" id="l-news">
         <div class="lhead reveal"><div><div class="kick acc">03 · Latest space discoveries</div><h2>News from the frontier</h2></div>
-          <p>Recent milestones from NASA missions, with photos from the NASA Image and Video Library.</p></div>
+          <div><p>Recent milestones from NASA missions, with photos from the NASA Image and Video Library.</p><button class="btn sm" style="margin-top:16px" data-act="go" data-v="news">All space news →</button></div></div>
         <div class="ngrid">${NEWS.map((n, i) => `
           <article class="ncard reveal" style="--i:${i}">
             <div class="ph">${pic(n.img, "", "medium")}</div>
@@ -1134,6 +1206,46 @@ const SCREENS = {
           <a class="o reveal" style="--i:3" href="https://images.nasa.gov/" target="_blank" rel="noopener"><small>Archive</small><b>NASA Image Library</b><p>Search NASA's public archive of images, videos and audio from more than 60 years of exploration.</p><span class="mcta">Open ↗</span></a>
         </div>
       </section>
+    </section>`;
+  },
+
+  news: () => {
+    setTimeout(() => Object.keys(FEEDS).forEach(k => FEED[k] || loadFeed(k))); // start live feeds once the page is on screen
+    const [lead, ...side] = NEWS, link = n => `https://images.nasa.gov/details/${n.src}`;
+    return `
+    <section class="dest news">
+      <div class="dest-top">
+        <header class="dest-head rise">
+          <div class="kick">Latest from space</div>
+          <h2 class="dest-title">Discover what's out there.</h2>
+          <p class="mut dest-sub">Follow the latest discoveries, scientific breakthroughs, and missions expanding our understanding of the universe.</p>
+        </header>
+        <div class="row rise" style="--i:1"><button class="btn ghost" data-act="go" data-v="home">← Home</button><button class="btn" data-act="go" data-v="explore">Explore space</button></div>
+      </div>
+
+      <div class="ntop">
+        <a class="nfeat ph rise" style="--i:2" href="${link(lead)}" target="_blank" rel="noopener">
+          ${pic("art002e012632", "", "large")}
+          <span class="xtag">Featured story</span>
+          <div class="nmeta"><b>${lead.tag}</b><span>${lead.date}</span></div>
+          <h3>${lead.title}</h3>
+          <p>${lead.text}</p>
+          <span class="nread">Read more on NASA <span aria-hidden="true">→</span></span>
+        </a>
+        <div class="nside">${side.map((n, i) => `
+          <a class="rise" style="--i:${i + 3}" href="${link(n)}" target="_blank" rel="noopener">
+            <div class="ph">${pic(n.img, "", "medium")}</div>
+            <div class="nbody"><div class="nmeta"><b>${n.tag}</b><span>${n.date}</span></div><h3>${n.title}</h3><span class="nread">Read more <span aria-hidden="true">→</span></span></div>
+          </a>`).join("")}
+        </div>
+      </div>
+
+      ${Object.entries(FEEDS).map(([k, f]) => `
+      <section class="nfeed" id="news-${k}">
+        <div class="lhead reveal"><div><div class="kick acc">${f.kick}</div><h2>${f.t}</h2></div><p>${f.note} Newest first, live from NASA.</p></div>
+        ${feedHTML(k)}
+      </section>`).join("")}
+      <p class="nsrc">Featured stories are hand-picked. Feeds load live from the public NASA Image and Video Library (images.nasa.gov); every card links to its NASA page.</p>
     </section>`;
   },
 
@@ -1412,6 +1524,7 @@ function share() {
 const ACT = {
   go: v => { S.screen = v; },
   planet: v => { S.planet = v; document.querySelectorAll(".xp").forEach(b => b.classList.toggle("on", b.dataset.v === v)); const el = document.getElementById("xdetail"); if (el) el.outerHTML = planetDetail(); return false; },
+  more: v => { loadFeed(v); return false; },
   jump: v => { document.getElementById(v)?.scrollIntoView({ behavior: "smooth" }); return false; },
   players: v => { S.players = +v; },
   scen: v => { S.d = newDesign(v); S.screen = "brief"; },

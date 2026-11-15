@@ -42,4 +42,7 @@ r.render(); assert.ok(/Mission report[\s\S]*(FULL SUCCESS|PARTIAL SUCCESS|MISSIO
 r = run(""); r.S.screen = "explore"; r.S.planet = "saturn"; r.render();
 assert.ok(r.app.innerHTML.includes("Beyond our world.") && ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"].every(n => r.app.innerHTML.includes(`aria-label="Explore ${n}"`)));
 assert.ok(r.app.innerHTML.includes('class="bpanel xdetail b-over x-saturn"'));
+// 7. news page: featured story renders without the live feeds (no fetch here), feed slots show placeholders
+r = run(""); r.S.screen = "news"; r.render();
+assert.ok(r.app.innerHTML.includes("Discover what's out there.") && r.app.innerHTML.includes("Featured story") && ["discoveries", "missions", "science"].every(k => r.app.innerHTML.includes(`id="nf-${k}"`)));
 console.log("all checks passed");
