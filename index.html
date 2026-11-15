@@ -763,7 +763,7 @@ function stats(o, capKey) {
   if (o.rate) b.push(o.rate + " Gb/day link");
   if (o.data) b.push(o.data + " Gb/day data");
   if (o.cost != null) b.push("$" + o.cost + "M");
-  if (o.cap) b.push(o.cap[capKey] ? "lifts " + fmt(o.cap[capKey]) + " kg here" : "can't reach this orbit");
+  if (o.cap && typeof o.cap === "object") b.push(o.cap[capKey] ? "lifts " + fmt(o.cap[capKey]) + " kg here" : "can't reach this orbit");
   if (o.dv != null) b.push("Δv " + o.dv + " km/s");
   return b.join(" · ");
 }

@@ -4,6 +4,8 @@
 
 ![Mission Dino landing page](docs/landing.png)
 
+**Presentation:** [7-slide project demo (PDF)](docs/Mission-Dino-presentation.pdf)
+
 ## What it is
 
 Mission Dino is a browser game about the trade-offs behind real space missions. You pick a destination, build a spacecraft within a budget, pass a launch review, then keep the mission alive through solar storms, hardware failures and surprise discoveries. Every choice costs mass, power, data or money, and there is no perfect answer.
