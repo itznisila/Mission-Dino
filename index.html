@@ -6,39 +6,55 @@
 <title>Mission Architect – Space Mission Design Game</title>
 <meta name="description" content="Design, launch and operate your own space mission. A NASA Space Apps Challenge 2026 entry (Space Mission Design Game).">
 <meta name="ai-assistance" content="Game code written with assistance from an AI model (Claude). Game design, testing and data choices by the team.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#070b1a;--panel:#111833;--line:#25305a;--txt:#e8ecff;--mut:#9aa5d1;--acc:#5b8cff;--ok:#3ddc97;--warn:#ffb547;--bad:#ff5c7a}
+:root{--bg:#000000;--txt:#ffffff;--mut:#969696;--line:#2b2b2b;--ok:#ffffff;--warn:#969696;--bad:#555555}
 *{box-sizing:border-box}
 html{background:var(--bg)}
-body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--txt);min-height:100vh;
- background:radial-gradient(1px 1px at 10% 20%,#fff8,transparent),radial-gradient(1px 1px at 70% 80%,#fff6,transparent),radial-gradient(1.5px 1.5px at 40% 60%,#fff7,transparent),radial-gradient(1px 1px at 85% 15%,#fff8,transparent),radial-gradient(ellipse at top,#1a2350,var(--bg) 60%) fixed}
-main{max-width:1150px;margin:auto;padding:20px}
-h1{font-size:2.2rem;margin:.2em 0}h2{margin:.3em 0}h3{margin:.2em 0 .5em}
-p{line-height:1.5}.mut{color:var(--mut)}
+body{margin:0;font-family:"D-DIN","Barlow",Arial,Helvetica,sans-serif;color:var(--txt);min-height:100vh;letter-spacing:.02em;
+ background:radial-gradient(1px 1px at 12% 22%,#fff9,transparent),radial-gradient(1px 1px at 72% 78%,#fff6,transparent),radial-gradient(1px 1px at 42% 58%,#fff5,transparent),radial-gradient(1px 1px at 86% 14%,#fff8,transparent),radial-gradient(1px 1px at 28% 88%,#fff5,transparent),#000}
+main{max-width:1200px;margin:auto;padding:28px 24px}
+h1,h2,h3,.btn,.badge,.lab,th{text-transform:uppercase;letter-spacing:.12em}
+h1{font-size:clamp(2.4rem,7vw,5rem);font-weight:700;margin:.1em 0;line-height:1}
+h2{font-size:1.6rem;font-weight:600;margin:.3em 0}h3{font-size:1rem;font-weight:600;margin:.2em 0 .8em}
+p{line-height:1.6}.mut{color:var(--mut)}
 button{font:inherit;color:inherit;cursor:pointer}
-.btn{background:var(--acc);border:0;border-radius:10px;padding:12px 20px;font-weight:600}
-.btn.ghost{background:transparent;border:1px solid var(--line)}
+.btn{background:transparent;color:#fff;border:2px solid #fff;border-radius:0;padding:14px 30px;font-weight:600;font-size:.9rem;transition:background .25s,color .25s}
+.btn:hover{background:#fff;color:#000}
+.btn.ghost{border-color:var(--mut);color:var(--mut)}.btn.ghost:hover{background:var(--mut);color:#000}
+.btn.sel{background:#fff;color:#000}
 .btn:disabled{opacity:.4;cursor:not-allowed}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;margin:12px 0}
-.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
-.opt{text-align:left;background:#0c1229;border:2px solid var(--line);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:6px}
-.opt:hover{border-color:#41508a}.opt.on{border-color:var(--acc);background:#14204a}
-.opt small{color:var(--mut);line-height:1.35}.st{font-size:.85rem;color:#bcd0ff}
-.layout{display:grid;grid-template-columns:1fr 320px;gap:18px;align-items:start}
-.dash{position:sticky;top:12px}
-.bar{margin:10px 0}.bar .lab{display:flex;justify-content:space-between;font-size:.9rem}
-.bar .trk{height:10px;background:#0a0f24;border-radius:6px;overflow:hidden;margin-top:4px}
-.bar .fil{height:100%;border-radius:6px}
-.badge{display:inline-block;background:#1d2a5c;border-radius:20px;padding:3px 10px;font-size:.8rem;margin-left:8px;color:#cfe0ff}
-.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-.chk li{margin:6px 0;line-height:1.4}
-input{background:#0c1229;border:1px solid var(--line);color:var(--txt);border-radius:8px;padding:8px}
-.rocket{font-size:4rem;display:inline-block;animation:up 2.6s ease-in forwards}
-@keyframes up{0%{transform:translateY(0)}20%{transform:translateY(4px)}100%{transform:translateY(-420px)}}
-.big{font-size:3rem;font-weight:800}
-footer{color:var(--mut);font-size:.8rem;text-align:center;padding:20px}
-table{width:100%;border-collapse:collapse}td,th{padding:6px;border-bottom:1px solid var(--line);text-align:left}
-@media(max-width:820px){.layout{grid-template-columns:1fr}.dash{position:static}}
+.card{background:transparent;border:1px solid var(--line);border-radius:0;padding:24px;margin:16px 0}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.opt{text-align:left;background:#000;border:1px solid var(--line);border-radius:0;padding:16px;display:flex;flex-direction:column;gap:8px;transition:border-color .2s,background .2s}
+.opt:hover{border-color:#fff}
+.opt b{text-transform:uppercase;letter-spacing:.08em;font-weight:600}
+.opt.on{background:#fff;color:#000;border-color:#fff}.opt.on small,.opt.on .st{color:#444}
+.opt small{color:var(--mut);line-height:1.45}.st{font-size:.82rem;color:#cfcfcf;letter-spacing:.04em}
+.layout{display:grid;grid-template-columns:1fr 330px;gap:24px;align-items:start}
+.dash{position:sticky;top:16px;background:#000}
+.bar{margin:14px 0}.bar .lab{display:flex;justify-content:space-between;font-size:.75rem;color:#cfcfcf}
+.bar .trk{height:4px;background:#1c1c1c;margin-top:6px}
+.bar .fil{height:100%}
+.over{color:#fff;font-weight:700}
+.badge{display:inline-block;border:1px solid var(--mut);padding:3px 10px;font-size:.68rem;margin-left:10px;color:var(--mut);vertical-align:middle}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.chk{list-style:none;padding:0}.chk li{margin:10px 0;line-height:1.5;padding-left:28px;position:relative}
+.mk{position:absolute;left:0;top:0;width:18px;height:18px;border:1px solid currentColor;font-size:.7rem;display:inline-flex;align-items:center;justify-content:center}
+.mk.ok{background:#fff;color:#000;border-color:#fff}.mk.warn{color:var(--mut)}.mk.bad{color:#fff}
+input{background:#000;border:1px solid var(--mut);color:var(--txt);border-radius:0;padding:10px;font:inherit}
+.hero{min-height:82vh;display:flex;flex-direction:column;justify-content:center;border:0;padding:40px 0;
+ background:radial-gradient(circle at 85% 110%,#3a3a3a 0,#111 28%,transparent 29%),radial-gradient(circle at 85% 110%,#ffffff22 29%,transparent 30%)}
+.hero .kick{color:var(--mut);letter-spacing:.3em;text-transform:uppercase;font-size:.85rem}
+.steps{border-top:1px solid var(--line);margin-top:40px;padding-top:24px}
+.steps .card{border:0;border-left:1px solid var(--line);padding:4px 20px;margin:0}
+.ship{width:14px;height:90px;background:linear-gradient(#fff 0 80%,#969696 80%);display:inline-block;position:relative;animation:up 2.6s ease-in forwards}
+.ship:after{content:"";position:absolute;left:3px;top:90px;width:8px;height:40px;background:linear-gradient(#fff,transparent);opacity:.8}
+@keyframes up{0%{transform:translateY(0)}20%{transform:translateY(4px)}100%{transform:translateY(-460px)}}
+.big{font-size:clamp(2rem,6vw,3.6rem);font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+footer{color:var(--mut);font-size:.72rem;text-align:center;padding:30px;letter-spacing:.12em;text-transform:uppercase;border-top:1px solid var(--line)}
+table{width:100%;border-collapse:collapse}td,th{padding:10px 6px;border-bottom:1px solid var(--line);text-align:left}
+@media(max-width:860px){.layout{grid-template-columns:1fr}.dash{position:static}}
 </style>
 </head>
 <body>
@@ -50,7 +66,7 @@ const G = 9.81, ISP = 320, EARTH_SUN = 1361; // W/m² sunlight at Earth (NASA Pl
 const BUS = { mass: 50, w: 80 }; // wiring, thermal control, harness
 
 const SCEN = {
-  earth: { name: "Earth Watch", icon: "🌍", diff: "Easy", irr: 1361, comms: 1, rad: 0, ops: 5, budget: 300,
+  earth: { name: "Earth Watch", icon: "", diff: "Easy", irr: 1361, comms: 1, rad: 0, ops: 5, budget: 300,
     target: { sci: 55, years: 5 }, where: "Earth orbit",
     goal: "Map forests, ice and farmland from orbit to track climate change.",
     bonus: "A big volcano erupts. Scientists want images right now.",
@@ -62,7 +78,7 @@ const SCEN = {
         learn: "Closer means sharper images, but it never flies over the poles, and air drag pulls it down within a few years." },
       { id: "geo", name: "Geostationary orbit (35,786 km)", dv: 1.8, cap: "GEO", cov: 0.5, life: 15, eclipse: false, rad: 0.5, link: 1.5,
         learn: "Hovers over one spot: sees half the Earth all the time but from far away (less detail). Getting there needs lots of fuel, but it is always in view of the ground station." } ] },
-  mars: { name: "Red Planet Mapper", icon: "🔴", diff: "Medium", irr: 586, comms: 0.2, rad: 0.5, ops: 10, budget: 450,
+  mars: { name: "Red Planet Mapper", icon: "", diff: "Medium", irr: 586, comms: 0.2, rad: 0.5, ops: 10, budget: 450,
     target: { sci: 60, years: 4 }, where: "Mars orbit",
     goal: "Find where water ice hides under the surface of Mars.",
     bonus: "A planet-wide dust storm is starting on Mars.",
@@ -72,7 +88,7 @@ const SCEN = {
         learn: "A low, near-polar orbit lets cameras see small details everywhere. Braking into it takes a lot of fuel." },
       { id: "ell", name: "High elliptical orbit", dv: 0.8, cap: "MARS", cov: 0.6, life: 10, eclipse: true, rad: 0,
         learn: "Cheaper to capture into, but the spacecraft spends most of its time far from the surface, so data is less detailed." } ] },
-  jupiter: { name: "Giant Planet Explorer", icon: "🪐", diff: "Hard", irr: 50.3, comms: 0.03, rad: 3, ops: 15, budget: 650,
+  jupiter: { name: "Giant Planet Explorer", icon: "", diff: "Hard", irr: 50.3, comms: 0.03, rad: 3, ops: 15, budget: 650,
     target: { sci: 40, years: 4 }, where: "Jupiter orbit",
     goal: "Measure what is under Jupiter's clouds and how its magnetic field works.",
     bonus: "A huge new storm appears in Jupiter's clouds.",
@@ -126,10 +142,10 @@ const LV = [
 ];
 
 const ROLES = [
-  { name: "Mission Lead", icon: "🧭", owns: ["orbit", "launch"], goal: "Keep at least 10% of the budget unspent.", ok: (r, s) => s.budget - r.cost >= 0.1 * s.budget },
-  { name: "Spacecraft Engineer", icon: "🔧", owns: ["structure", "power", "battery", "computer", "adcs"], goal: "Keep at least a 20% power margin.", ok: r => r.gen >= 1.2 * r.use },
-  { name: "Science Lead", icon: "🔬", owns: ["inst"], goal: "Return at least 120% of the science target.", ok: (r, s) => r.sciFinal >= 1.2 * s.target.sci },
-  { name: "Comms & Ops", icon: "📡", owns: ["comms", "ops"], goal: "Downlink capacity must cover all data generated.", ok: r => r.link >= r.data }
+  { name: "Mission Lead", icon: "", owns: ["orbit", "launch"], goal: "Keep at least 10% of the budget unspent.", ok: (r, s) => s.budget - r.cost >= 0.1 * s.budget },
+  { name: "Spacecraft Engineer", icon: "", owns: ["structure", "power", "battery", "computer", "adcs"], goal: "Keep at least a 20% power margin.", ok: r => r.gen >= 1.2 * r.use },
+  { name: "Science Lead", icon: "", owns: ["inst"], goal: "Return at least 120% of the science target.", ok: (r, s) => r.sciFinal >= 1.2 * s.target.sci },
+  { name: "Comms & Ops", icon: "", owns: ["comms", "ops"], goal: "Downlink capacity must cover all data generated.", ok: r => r.link >= r.data }
 ];
 
 const OPT = {};
@@ -178,7 +194,7 @@ function finish(d, r) {
 // ---------- Events during operations ----------
 const pct = x => Math.round(x * 100) + "%";
 const EVENTS = [
-  { id: "storm", title: "☀️ Solar storm!", text: () => "A burst of energetic particles from the Sun is heading your way.",
+  { id: "storm", title: "Solar storm!", text: () => "A burst of energetic particles from the Sun is heading your way.",
     a: "Switch to safe mode for a week", b: "Keep observing",
     run(d, r, c) {
       if (c === "a") { d.ev.sci *= 0.97; return "Safe and sound. You lost a week of observations (−3% science). Real operators often do exactly this."; }
@@ -186,34 +202,34 @@ const EVENTS = [
       if (Math.random() < 0.6) { d.ev.sci *= 0.9; d.ev.life *= 0.95; return "The standard computer crashed and rebooted. Recovery took weeks (−10% science, −5% lifetime). Radiation-hardened electronics prevent this."; }
       return "Lucky! No damage this time, but a standard computer is a gamble in a storm.";
     } },
-  { id: "wheel", title: "⚙️ Reaction wheel failure", text: () => "One of the wheels that points the spacecraft has stopped spinning.",
+  { id: "wheel", title: "Reaction wheel failure", text: () => "One of the wheels that points the spacecraft has stopped spinning.",
     a: "Use thrusters to point instead", b: "Live with less accurate pointing",
     run(d, r, c) {
       if (OPT[d.adcs].spare) return "Your precision system carried a spare wheel, which took over. No losses!";
       if (c === "a") { d.ev.life *= 0.85; return "Thrusters burn propellant every time you turn, so you will run out of fuel sooner (−15% lifetime)."; }
       d.ev.sci *= 0.88; return "Blurrier pointing means less useful data (−12% science). The Kepler space telescope had to adapt to wheel failures too.";
     } },
-  { id: "station", title: "📡 Ground station outage", text: () => "A storm knocks out the big antenna on the ground for 5 days.",
+  { id: "station", title: "Ground station outage", text: () => "A storm knocks out the big antenna on the ground for 5 days.",
     a: "Store data onboard and send it later", b: "Delete old data to keep collecting",
     run(d, r, c) {
       if (c === "b") { d.ev.sci *= 0.94; return "You kept observing but lost the deleted data (−6% science)."; }
       if (r.link >= r.data * 1.3) return "You had spare downlink capacity, so the backlog cleared in days. Nothing lost!";
       d.ev.sci *= 0.95; return "Your link was already full, so the backlog never fully cleared (−5% science). Spare comms capacity is insurance.";
     } },
-  { id: "glitch", title: "🔬 Instrument glitch", text: d => `Your ${OPT[d.inst[0]].name.toLowerCase()} is returning strange readings.`,
+  { id: "glitch", title: "Instrument glitch", text: d => `Your ${OPT[d.inst[0]].name.toLowerCase()} is returning strange readings.`,
     a: "Spend 2 weeks recalibrating", b: "Switch it off for good",
     run(d, r, c) {
       if (c === "a") { d.ev.sci *= 0.97; return "Recalibration worked. You lost two weeks of data (−3% science)."; }
       const i = OPT[d.inst[0]], share = i.sci * i.fit[d.scen] / r.sciRaw;
       d.ev.sci *= 1 - share; return `You lost all of its science (−${pct(share)}). Turning instruments off is permanent!`;
     } },
-  { id: "cut", title: "💸 Budget cut", text: () => "The space agency has to trim your operations budget.",
+  { id: "cut", title: "Budget cut", text: () => "The space agency has to trim your operations budget.",
     a: "End the mission one year early", b: "Run with a smaller team",
     run(d, r, c) {
       if (c === "a") { d.ev.life *= 0.8; return "Missions often end because of money, not hardware (−20% lifetime)."; }
       d.ev.sci *= 0.92; return "Fewer people to plan observations means less science (−8% science), but the spacecraft keeps going.";
     } },
-  { id: "bonus", title: "✨ Surprise opportunity", text: d => SCEN[d.scen].bonus,
+  { id: "bonus", title: "Surprise opportunity", text: d => SCEN[d.scen].bonus,
     a: "Re-plan to observe it ($5M extra)", b: "Stick to the plan",
     run(d, r, c) {
       if (c === "b") return "Steady as planned. No change.";
@@ -221,7 +237,7 @@ const EVENTS = [
       if (d.inst.some(i => ["cam", "spec", "therm"].includes(i))) { d.ev.sci *= 1.1; return "Great data on a rare event (+10% science)! Flexible missions catch surprises."; }
       return "None of your instruments can image it, so the extra money was wasted.";
     } },
-  { id: "eclipse", title: "🌑 Long eclipse season", text: () => "Your orbit now spends longer in the planet's shadow, with no sunlight on the panels.",
+  { id: "eclipse", title: "Long eclipse season", text: () => "Your orbit now spends longer in the planet's shadow, with no sunlight on the panels.",
     a: "Turn off instruments in the shadow", b: "Keep everything running",
     when: (d, r) => r.o.eclipse && OPT[d.power].solar,
     run(d, r, c) {
@@ -235,7 +251,7 @@ const EVENTS = [
 let S = { screen: "home", players: 1, names: ["Player 1", "Player 2", "Player 3", "Player 4"], team: "", d: null, events: [], ei: 0, out: null };
 const $app = document.getElementById("app");
 const fmt = n => Math.round(n).toLocaleString();
-const owner = key => { const i = ROLES.findIndex(r => r.owns.includes(key)); return S.players > 1 ? `<span class="badge">${ROLES[i].icon} ${S.names[i % S.players]} · ${ROLES[i].name}</span>` : ""; };
+const owner = key => { const i = ROLES.findIndex(r => r.owns.includes(key)); return S.players > 1 ? `<span class="badge">${S.names[i % S.players]} · ${ROLES[i].name}</span>` : ""; };
 const newDesign = scen => ({ scen, orbit: SCEN[scen].orbits[0].id, structure: "std", power: "solS", battery: "batS", computer: "cpu", adcs: "adB", comms: "lga", launch: "med", inst: [] });
 
 function stats(o, capKey) {
@@ -256,31 +272,32 @@ const card = (key, o, on, capKey) => `<button class="opt ${on ? "on" : ""}" data
 function bar(label, val, max, unit, higherBetter) {
   const r = max ? val / max : (val ? 9 : 0);
   const col = higherBetter ? (r >= 1 ? "var(--ok)" : r >= 0.7 ? "var(--warn)" : "var(--bad)") : (r > 1 ? "var(--bad)" : r > 0.85 ? "var(--warn)" : "var(--ok)");
-  return `<div class="bar"><div class="lab"><span>${label}</span><span>${unit(val)} / ${max ? unit(max) : "—"}</span></div><div class="trk"><div class="fil" style="width:${Math.min(100, r * 100)}%;background:${col}"></div></div></div>`;
+  return `<div class="bar"><div class="lab"><span>${label}</span><span class="${!higherBetter && r > 1 ? "over" : ""}">${!higherBetter && r > 1 ? "OVER · " : ""}${unit(val)} / ${max ? unit(max) : "—"}</span></div><div class="trk"><div class="fil" style="width:${Math.min(100, r * 100)}%;background:${col}"></div></div></div>`;
 }
 
 // ---------- Screens ----------
 const SCREENS = {
   home: () => `
-    <div class="card" style="text-align:center;padding:40px">
-      <div style="font-size:3rem">🛰️</div><h1>Mission Architect</h1>
-      <p class="mut" style="max-width:620px;margin:auto">Design a real-feeling space mission from idea to operations. Every choice has a cost: more instruments mean more mass, power, data and money. There is no single right answer, only trade-offs.</p>
-      <div class="grid" style="margin:24px 0;text-align:left">
-        <div class="card"><b>1. Pick a goal</b><p class="mut">Earth, Mars or Jupiter, each with its own budget and science target.</p></div>
-        <div class="card"><b>2. Design &amp; launch</b><p class="mut">Choose orbit, power, comms, instruments and rocket. Pass the launch review.</p></div>
-        <div class="card"><b>3. Operate</b><p class="mut">Handle solar storms, failures and surprises, then read your mission report.</p></div>
+    <section class="hero">
+      <div class="kick">NASA Space Apps Challenge 2026</div>
+      <h1>Mission<br>Architect</h1>
+      <p class="mut" style="max-width:560px;font-size:1.1rem">Design a space mission from idea to operations. Every choice costs mass, power, data or money. There is no perfect answer, only trade-offs.</p>
+      <div class="row" style="margin-top:20px"><button class="btn" data-act="go" data-v="setup">Start mission</button></div>
+      <div class="grid steps">
+        <div class="card"><h3>01 / Goal</h3><p class="mut">Earth, Mars or Jupiter, each with its own budget and science target.</p></div>
+        <div class="card"><h3>02 / Design &amp; launch</h3><p class="mut">Orbit, power, comms, instruments and rocket. Pass the launch review.</p></div>
+        <div class="card"><h3>03 / Operate</h3><p class="mut">Survive storms, failures and surprises. Read your mission report.</p></div>
       </div>
-      <button class="btn" data-act="go" data-v="setup">Start a mission 🚀</button>
-    </div>`,
+    </section>`,
 
   setup: () => `
     <div class="card"><h2>Who is on the mission team?</h2>
       <p class="mut">Play alone, or with up to 4 people on one screen. Each player gets a role, owns part of the design, and has their own goal, so you will need to negotiate.</p>
-      <div class="row">${[1, 2, 3, 4].map(n => `<button class="btn ${S.players === n ? "" : "ghost"}" data-act="players" data-v="${n}">${n} player${n > 1 ? "s" : ""}</button>`).join("")}</div>
+      <div class="row">${[1, 2, 3, 4].map(n => `<button class="btn ${S.players === n ? "sel" : "ghost"}" data-act="players" data-v="${n}">${n} player${n > 1 ? "s" : ""}</button>`).join("")}</div>
       <div class="row" style="margin-top:14px"><label>Team name <input id="team" value="${S.team}" placeholder="e.g. Team Nova"></label></div>
       <div class="grid" style="margin-top:14px">${Array.from({ length: S.players }, (_, i) => `<label>Player ${i + 1}<br><input data-name="${i}" value="${S.names[i]}"></label>`).join("")}</div>
       <h3 style="margin-top:20px">Roles</h3>
-      <table>${ROLES.map((r, i) => `<tr><td>${r.icon} <b>${r.name}</b></td><td class="mut">${r.goal}</td><td>${S.players > 1 ? S.names[i % S.players] : "You"}</td></tr>`).join("")}</table>
+      <table>${ROLES.map((r, i) => `<tr><td><b>${r.name}</b></td><td class="mut">${r.goal}</td><td>${S.players > 1 ? S.names[i % S.players] : "You"}</td></tr>`).join("")}</table>
       <p class="mut">Each role goal met at the end = +50 bonus points.</p>
       <button class="btn" data-act="go" data-v="scen">Next: choose a mission</button>
     </div>`,
@@ -288,7 +305,7 @@ const SCREENS = {
   scen: () => `
     <h2>Choose your mission</h2>
     <div class="grid">${Object.entries(SCEN).map(([k, s]) => `
-      <button class="opt" data-act="scen" data-v="${k}"><span style="font-size:2.4rem">${s.icon}</span><b>${s.name}</b><span class="badge" style="margin:0;width:max-content">${s.diff}</span>
+      <button class="opt" data-act="scen" data-v="${k}"><b>${s.name}</b><span class="badge" style="margin:0;width:max-content">${s.diff}</span>
       <small>${s.goal}</small><span class="st">Budget $${s.budget}M · Science target ${s.target.sci} · ${s.target.years} years</span></button>`).join("")}
     </div>`,
 
@@ -296,22 +313,22 @@ const SCREENS = {
     const d = S.d, s = SCEN[d.scen], r = compute(d), o = r.o;
     const sec = (key, title, body, help) => `<div class="card"><h3>${title}${owner(key)}</h3>${help ? `<p class="mut">${help}</p>` : ""}<div class="grid">${body}</div></div>`;
     return `<div class="layout"><div>
-      <div class="card"><h2>${s.icon} ${s.name}</h2><p>${s.goal}</p><p class="mut">Budget <b>$${s.budget}M</b> · Science target <b>${s.target.sci}</b> · Lifetime target <b>${s.target.years} years</b></p></div>
+      <div class="card"><h2>${s.name}</h2><p>${s.goal}</p><p class="mut">Budget <b>$${s.budget}M</b> · Science target <b>${s.target.sci}</b> · Lifetime target <b>${s.target.years} years</b></p></div>
       ${sec("orbit", "1. Orbit", s.orbits.map(x => card("orbit", x, d.orbit === x.id)).join(""), "Δv is the speed change your spacecraft must make itself with its own fuel once the rocket drops it off.")}
       ${PART_KEYS.map((k, i) => sec(k, `${i + 2}. ${PARTS[k].label}`, PARTS[k].opts.map(x => card(k, x, d[k] === x.id)).join(""))).join("")}
       ${sec("inst", "8. Science instruments (pick any)", INST.map(x => card("inst", x, d.inst.includes(x.id))).join(""), `Science points depend on the target: an instrument great at Jupiter may be weak at Earth. Value here: ${INST.map(i => `${i.name.split(" ")[0]} ${Math.round(i.sci * i.fit[d.scen])}`).join(", ")}.`)}
       ${sec("launch", "9. Launch vehicle", LV.map(x => card("launch", x, d.launch === x.id, o.cap)).join(""))}
-      <div class="row"><button class="btn ghost" data-act="go" data-v="scen">← Change mission</button><button class="btn ghost" data-act="share">🔗 Copy share link</button><button class="btn" data-act="go" data-v="review">Launch readiness review →</button></div>
+      <div class="row"><button class="btn ghost" data-act="go" data-v="scen">← Change mission</button><button class="btn ghost" data-act="share">Copy share link</button><button class="btn" data-act="go" data-v="review">Launch readiness review →</button></div>
     </div>
     <div class="dash card"><h3>Mission dashboard</h3>
-      ${bar("⚖️ Mass vs rocket limit", r.wet, r.cap, v => fmt(v) + " kg")}
+      ${bar("Mass vs rocket limit", r.wet, r.cap, v => fmt(v) + " kg")}
       <small class="mut">Dry ${fmt(r.dry)} kg + fuel ${fmt(r.prop)} kg</small>
-      ${bar("⚡ Power used vs made", r.use, r.gen, v => fmt(v) + " W")}
-      ${bar("💰 Cost vs budget", r.cost, s.budget, v => "$" + fmt(v) + "M")}
+      ${bar("Power used vs made", r.use, r.gen, v => fmt(v) + " W")}
+      ${bar("Cost vs budget", r.cost, s.budget, v => "$" + fmt(v) + "M")}
       <small class="mut">Includes $${s.ops * s.target.years}M operations</small>
-      ${bar("📡 Data vs downlink", r.data, r.link, v => v.toFixed(1) + " Gb")}
-      ${bar("⏳ Lifetime", r.life, s.target.years, v => v.toFixed(1) + " yr", true)}
-      ${bar("🔬 Expected science", r.sci, s.target.sci, v => fmt(v), true)}
+      ${bar("Data vs downlink", r.data, r.link, v => v.toFixed(1) + " Gb")}
+      ${bar("Lifetime", r.life, s.target.years, v => v.toFixed(1) + " yr", true)}
+      ${bar("Expected science", r.sci, s.target.sci, v => fmt(v), true)}
       <p class="mut" style="font-size:.85rem">${tip(d, r)}</p>
     </div></div>`;
   },
@@ -323,20 +340,20 @@ const SCREENS = {
     if (!r.cap) blockers.push(`The ${r.lv.name.toLowerCase()} can't reach ${s.where}. Pick a bigger rocket.`);
     else if (r.wet > r.cap) blockers.push(`Too heavy: ${fmt(r.wet)} kg, but the rocket can only lift ${fmt(r.cap)} kg there. Remove mass or use a bigger rocket. Remember, every extra kg also needs extra fuel.`);
     if (r.cost > s.budget) blockers.push(`Over budget: $${fmt(r.cost)}M vs $${s.budget}M. The review board will not approve this.`);
-    explain(d, r).filter(x => x[0] !== "✅").forEach(x => warns.push(x[1]));
-    return `<div class="card"><h2>🧑‍🚀 Launch readiness review</h2>
-      ${blockers.length ? `<h3 style="color:var(--bad)">❌ Not ready to launch</h3><ul class="chk">${blockers.map(b => `<li>${b}</li>`).join("")}</ul>` : `<h3 style="color:var(--ok)">✅ Cleared for launch</h3>`}
-      ${warns.length ? `<h3 style="color:var(--warn)">⚠️ Risks the review board noticed</h3><ul class="chk">${warns.map(w => `<li>${w}</li>`).join("")}</ul>` : ""}
-      <div class="row"><button class="btn ghost" data-act="go" data-v="design">← Back to design</button>${blockers.length ? "" : `<button class="btn" data-act="launch">Launch! 🚀</button>`}</div></div>`;
+    explain(d, r).filter(x => x[0] !== "ok").forEach(x => warns.push(x[1]));
+    return `<div class="card"><h2>‍Launch readiness review</h2>
+      ${blockers.length ? `<h3 >Not ready to launch</h3><ul class="chk">${blockers.map(b => `<li>${mark("bad")}${b}</li>`).join("")}</ul>` : `<h3 >Cleared for launch</h3>`}
+      ${warns.length ? `<h3 class="mut">Risks the review board noticed</h3><ul class="chk">${warns.map(w => `<li>${mark("warn")}${w}</li>`).join("")}</ul>` : ""}
+      <div class="row"><button class="btn ghost" data-act="go" data-v="design">← Back to design</button>${blockers.length ? "" : `<button class="btn" data-act="launch">Launch! </button>`}</div></div>`;
   },
 
-  launch: () => `<div class="card" style="text-align:center;min-height:480px;overflow:hidden"><h2>T-0: Liftoff!</h2><div style="margin-top:300px"><span class="rocket">🚀</span></div><p class="mut">Cruising to ${SCEN[S.d.scen].where}...</p></div>`,
+  launch: () => `<div class="card" style="text-align:center;min-height:480px;overflow:hidden"><h2>T-0: Liftoff!</h2><div style="margin-top:300px"><span class="ship"></span></div><p class="mut">Cruising to ${SCEN[S.d.scen].where}...</p></div>`,
 
   ops: () => {
     const ev = S.events[S.ei], d = S.d, months = Math.round(SCEN[d.scen].target.years * 12 * (S.ei + 1) / (S.events.length + 1));
     return `<div class="card"><p class="mut">Mission operations · Month ${months} · Event ${S.ei + 1} of ${S.events.length}</p>
       <h2>${ev.title}</h2><p>${ev.text(d)}</p>
-      ${S.players > 1 ? `<p class="badge" style="margin:0">📡 Decision lead: ${S.names[3 % S.players]} (Comms &amp; Ops). Discuss with the team!</p>` : ""}
+      ${S.players > 1 ? `<p class="badge" style="margin:0">Decision lead: ${S.names[3 % S.players]} (Comms &amp; Ops). Discuss with the team!</p>` : ""}
       ${S.out ? `<div class="card"><p>${S.out}</p></div><button class="btn" data-act="next">Continue →</button>`
       : `<div class="row" style="margin-top:14px"><button class="btn" data-act="choose" data-v="a">${ev.a}</button><button class="btn ghost" data-act="choose" data-v="b">${ev.b}</button></div>`}
     </div>`;
@@ -344,41 +361,42 @@ const SCREENS = {
 
   report: () => {
     const d = S.d, s = SCEN[d.scen], r = finish(d, compute(d));
-    const col = r.result === "FULL SUCCESS" ? "var(--ok)" : r.result === "MISSION FAILED" ? "var(--bad)" : "var(--warn)";
+    const col = r.result === "FULL SUCCESS" ? "#fff" : "var(--mut)";
     saveScore(r.score);
-    return `<div class="card" style="text-align:center"><p class="mut">${s.icon} ${s.name} · Mission report${S.team ? " · " + S.team : ""}</p>
+    return `<div class="card" style="text-align:center"><p class="mut">${s.name} · Mission report${S.team ? " · " + S.team : ""}</p>
       <div class="big" style="color:${col}">${r.result}</div><div class="big">${fmt(r.score)} pts</div>
       <p>Science ${fmt(r.sciFinal)} / ${s.target.sci} (${pct(r.sciR)}) · Lifetime ${r.lifeFinal.toFixed(1)} / ${s.target.years} yr · Cost $${fmt(r.cost)}M / $${s.budget}M</p></div>
-      <div class="card"><h3>Why it went this way</h3><ul class="chk">${explain(d, r).map(x => `<li>${x[0]} ${x[1]}</li>`).join("")}</ul></div>
-      <div class="card"><h3>What happened in operations</h3><ul class="chk">${d.ev.log.map(l => `<li><b>${l[0]}</b>: ${l[1]}</li>`).join("")}</ul></div>
-      <div class="card"><h3>Team goals (+50 each)</h3><ul class="chk">${ROLES.map((g, i) => `<li>${r.goals[i] ? "✅" : "❌"} ${g.icon} ${g.name}${S.players > 1 ? " (" + S.names[i % S.players] + ")" : ""}: ${g.goal}</li>`).join("")}</ul></div>
-      <div class="card"><h3>🛰️ Compare with a real NASA mission</h3><p>${s.real}</p><p class="mut">Your spacecraft: ${fmt(r.wet)} kg at launch, ${fmt(r.gen)} W of power at ${s.where}.</p></div>
-      <div class="card"><h3>🏆 Best missions on this device (${s.name})</h3><table>${board(d.scen).map((b, i) => `<tr><td>${i + 1}</td><td>${b.n}</td><td>${fmt(b.s)} pts</td></tr>`).join("") || "<tr><td>No scores yet</td></tr>"}</table></div>
-      <div class="row"><button class="btn" data-act="retry">🔁 Change the design and fly again</button><button class="btn ghost" data-act="share">🔗 Share this design</button><button class="btn ghost" data-act="go" data-v="scen">New mission</button></div>`;
+      <div class="card"><h3>Why it went this way</h3><ul class="chk">${explain(d, r).map(x => `<li>${mark(x[0])}${x[1]}</li>`).join("")}</ul></div>
+      <div class="card"><h3>What happened in operations</h3><ul class="chk">${d.ev.log.map(l => `<li>${mark("")}<b>${l[0]}</b>: ${l[1]}</li>`).join("")}</ul></div>
+      <div class="card"><h3>Team goals (+50 each)</h3><ul class="chk">${ROLES.map((g, i) => `<li>${mark(r.goals[i] ? "ok" : "bad")}${g.name}${S.players > 1 ? " (" + S.names[i % S.players] + ")" : ""}: ${g.goal}</li>`).join("")}</ul></div>
+      <div class="card"><h3>Compare with a real NASA mission</h3><p>${s.real}</p><p class="mut">Your spacecraft: ${fmt(r.wet)} kg at launch, ${fmt(r.gen)} W of power at ${s.where}.</p></div>
+      <div class="card"><h3>Best missions on this device (${s.name})</h3><table>${board(d.scen).map((b, i) => `<tr><td>${i + 1}</td><td>${b.n}</td><td>${fmt(b.s)} pts</td></tr>`).join("") || "<tr><td>No scores yet</td></tr>"}</table></div>
+      <div class="row"><button class="btn" data-act="retry">Change the design and fly again</button><button class="btn ghost" data-act="share">Share this design</button><button class="btn ghost" data-act="go" data-v="scen">New mission</button></div>`;
   }
 };
 
+const mark = m => `<span class="mk ${m}">${m === "ok" ? "✓" : m === "bad" ? "✕" : m === "warn" ? "!" : "·"}</span>`;
 function tip(d, r) {
-  if (!d.inst.length) return "💡 Start by adding instruments. They are why the mission exists.";
-  if (r.cap && r.wet > r.cap) return "💡 Too heavy for this rocket. Fuel grows with mass, so dropping 10 kg of hardware saves even more.";
-  if (r.gen < r.use) return "💡 Not enough power, so instruments will only run part of the time.";
-  if (r.data > r.link) return "💡 You collect more data than you can send home. The rest is lost.";
-  if (r.radExcess > 0) return "💡 Radiation will shorten your mission. Shielding or a hardened computer helps.";
-  return "💡 Looking good! Try the launch readiness review.";
+  if (!d.inst.length) return "Start by adding instruments. They are why the mission exists.";
+  if (r.cap && r.wet > r.cap) return "Too heavy for this rocket. Fuel grows with mass, so dropping 10 kg of hardware saves even more.";
+  if (r.gen < r.use) return "Not enough power, so instruments will only run part of the time.";
+  if (r.data > r.link) return "You collect more data than you can send home. The rest is lost.";
+  if (r.radExcess > 0) return "Radiation will shorten your mission. Shielding or a hardened computer helps.";
+  return "Looking good! Try the launch readiness review.";
 }
 
 function explain(d, r) {
   const s = r.s, out = [];
-  if (r.cap) out.push([r.wet <= r.cap ? "✅" : "❌", `Mass: ${fmt(r.wet)} kg including ${fmt(r.prop)} kg of fuel for a ${r.o.dv} km/s burn (rocket equation). Rocket limit: ${fmt(r.cap)} kg.`]);
+  if (r.cap) out.push([r.wet <= r.cap ? "ok" : "bad", `Mass: ${fmt(r.wet)} kg including ${fmt(r.prop)} kg of fuel for a ${r.o.dv} km/s burn (rocket equation). Rocket limit: ${fmt(r.cap)} kg.`]);
   const sunPct = Math.round(s.irr / EARTH_SUN * 100);
-  out.push([r.duty >= 1 ? "✅" : "⚠️", `Power: ${fmt(r.gen)} W made vs ${fmt(r.use)} W needed.` + (OPT[d.power].solar && sunPct < 100 ? ` At ${s.where} sunlight is only ${sunPct}% as strong as at Earth (NASA Planetary Fact Sheet).` : "") + (r.duty < 1 ? ` Instruments can only run ${pct(r.duty)} of the time.` : "")]);
-  if (r.battNeed) out.push([r.battF === 1 ? "✅" : "⚠️", r.battF === 1 ? "Battery: big enough to get through each pass in the planet's shadow." : `Battery: too small for the shadow passes (needs about ${fmt(r.battNeed)} Wh). You lose 20% of observations.`]);
-  out.push([r.linkF >= 1 ? "✅" : "⚠️", `Data: instruments make ${r.data.toFixed(1)} Gb/day, your link sends ${r.link.toFixed(1)} Gb/day.` + (r.linkF < 1 ? ` Only ${pct(r.linkF)} of the data gets home. A farther target means a weaker signal.` : "")]);
-  if (r.pointF < 1) out.push(["⚠️", "Pointing: cameras and spectrometers need precise pointing. Basic wheels cost you 15% of their quality."]);
-  if (s.rad + r.o.rad > 0) out.push([r.radExcess ? "⚠️" : "✅", r.radExcess ? `Radiation: not enough protection, so electronics wear out early (lifetime ×${r.lifeF.toFixed(2)}).` : "Radiation: your shielding and electronics can handle this environment."]);
-  out.push([r.life >= s.target.years ? "✅" : "⚠️", `Lifetime: expected ${r.life.toFixed(1)} years vs ${s.target.years}-year goal.`]);
-  out.push([r.sci >= s.target.sci ? "✅" : "⚠️", `Science: ${fmt(r.sci)} expected vs target ${s.target.sci}. Orbit coverage ×${r.o.cov}.`]);
-  out.push([r.cost <= s.budget ? "✅" : "❌", `Budget: $${fmt(r.cost)}M of $${s.budget}M.`]);
+  out.push([r.duty >= 1 ? "ok" : "warn", `Power: ${fmt(r.gen)} W made vs ${fmt(r.use)} W needed.` + (OPT[d.power].solar && sunPct < 100 ? ` At ${s.where} sunlight is only ${sunPct}% as strong as at Earth (NASA Planetary Fact Sheet).` : "") + (r.duty < 1 ? ` Instruments can only run ${pct(r.duty)} of the time.` : "")]);
+  if (r.battNeed) out.push([r.battF === 1 ? "ok" : "warn", r.battF === 1 ? "Battery: big enough to get through each pass in the planet's shadow." : `Battery: too small for the shadow passes (needs about ${fmt(r.battNeed)} Wh). You lose 20% of observations.`]);
+  out.push([r.linkF >= 1 ? "ok" : "warn", `Data: instruments make ${r.data.toFixed(1)} Gb/day, your link sends ${r.link.toFixed(1)} Gb/day.` + (r.linkF < 1 ? ` Only ${pct(r.linkF)} of the data gets home. A farther target means a weaker signal.` : "")]);
+  if (r.pointF < 1) out.push(["warn", "Pointing: cameras and spectrometers need precise pointing. Basic wheels cost you 15% of their quality."]);
+  if (s.rad + r.o.rad > 0) out.push([r.radExcess ? "warn" : "ok", r.radExcess ? `Radiation: not enough protection, so electronics wear out early (lifetime ×${r.lifeF.toFixed(2)}).` : "Radiation: your shielding and electronics can handle this environment."]);
+  out.push([r.life >= s.target.years ? "ok" : "warn", `Lifetime: expected ${r.life.toFixed(1)} years vs ${s.target.years}-year goal.`]);
+  out.push([r.sci >= s.target.sci ? "ok" : "warn", `Science: ${fmt(r.sci)} expected vs target ${s.target.sci}. Orbit coverage ×${r.o.cov}.`]);
+  out.push([r.cost <= s.budget ? "ok" : "bad", `Budget: $${fmt(r.cost)}M of $${s.budget}M.`]);
   return out;
 }
 
