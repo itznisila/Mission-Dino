@@ -300,7 +300,7 @@ const SCREENS = {
       <h3 style="margin-top:20px">Roles</h3>
       <table>${ROLES.map((r, i) => `<tr><td><b>${r.name}</b></td><td class="mut">${r.goal}</td><td>${S.players > 1 ? esc(S.names[i % S.players]) : "You"}</td></tr>`).join("")}</table>
       <p class="mut">Each role goal met at the end = +50 bonus points.</p>
-      <button class="btn" data-act="go" data-v="scen">Next: choose a mission</button>
+      <div class="row"><button class="btn ghost" data-act="go" data-v="home">← Back</button><button class="btn" data-act="go" data-v="scen">Next: choose a mission</button></div>
     </div>`,
 
   scen: () => `
