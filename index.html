@@ -8,7 +8,7 @@
 <meta name="ai-assistance" content="Game code written with assistance from an AI model (Claude). Game design, testing and data choices by the team.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--gut:clamp(16px,4vw,72px);--top:28px;--bg:#000000;--txt:#ffffff;--mut:#969696;--line:#2b2b2b;--ok:#ffffff;--warn:#969696;--bad:#555555}
+:root{--blue:#5aa9ff;--orange:#ff8c42;--gut:clamp(16px,4vw,72px);--top:28px;--bg:#000000;--txt:#ffffff;--mut:#969696;--line:#2b2b2b;--ok:#ffffff;--warn:#969696;--bad:#555555}
 *{box-sizing:border-box}
 html{background:var(--bg);overflow-x:clip}
 body{margin:0;font-family:"D-DIN","Barlow",Arial,Helvetica,sans-serif;color:var(--txt);min-height:100vh;min-height:100svh;display:flex;flex-direction:column;overflow-x:clip;letter-spacing:.02em;
@@ -45,7 +45,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 input{background:#000;border:1px solid var(--mut);color:var(--txt);border-radius:0;padding:10px;font:inherit}
 .hero{min-height:100vh;min-height:100svh;margin:calc(-1 * var(--top)) calc(-1 * var(--gut)) 0;display:flex;flex-direction:column;justify-content:center;border:0;padding:40px var(--gut);
  background:radial-gradient(circle at 85% 110%,#3a3a3a 0,#111 28%,transparent 29%),radial-gradient(circle at 85% 110%,#ffffff22 29%,transparent 30%)}
-.hero .kick{color:var(--mut);letter-spacing:.3em;text-transform:uppercase;font-size:.85rem}
+.kick{color:var(--mut);letter-spacing:.3em;text-transform:uppercase;font-size:.85rem}
 .steps{border-top:1px solid var(--line);margin-top:40px;padding-top:24px}
 .steps .card{border:0;border-left:1px solid var(--line);padding:4px 20px;margin:0}
 .ship{width:14px;height:90px;background:linear-gradient(#fff 0 80%,#969696 80%);display:inline-block;position:relative;animation:up 2.6s ease-in forwards}
@@ -54,6 +54,73 @@ input{background:#000;border:1px solid var(--mut);color:var(--txt);border-radius
 .big{font-size:clamp(2rem,6vw,3.6rem);font-weight:700;letter-spacing:.08em;text-transform:uppercase}
 footer{color:var(--mut);font-size:.72rem;text-align:center;padding:30px var(--gut);letter-spacing:.12em;text-transform:uppercase;border-top:1px solid var(--line)}
 table{width:100%;border-collapse:collapse}td,th{overflow-wrap:anywhere;padding:10px 6px;border-bottom:1px solid var(--line);text-align:left}
+/* ---------- Mission select ---------- */
+main:has(>.dest){display:flex;flex-direction:column}
+.dest{flex:1;position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:clamp(22px,4vh,44px);
+ margin:calc(-1 * var(--top)) calc(-1 * var(--gut)) 0;padding:clamp(28px,5vh,64px) var(--gut)}
+.dest::before{content:"";position:absolute;inset:0;z-index:-2;background:
+ radial-gradient(ellipse 70% 40% at 50% 112%,#5aa9ff2e,transparent 70%),
+ radial-gradient(ellipse 45% 35% at 92% 0%,#ff8c4214,transparent 70%),
+ radial-gradient(ellipse 40% 40% at 0% 30%,#5aa9ff0d,transparent 70%),#000}
+.dest::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;animation:twinkle 6s ease-in-out infinite alternate;background:
+ radial-gradient(1px 1px at 8% 18%,#fff,transparent),radial-gradient(1px 1px at 23% 62%,#fffb,transparent),radial-gradient(1.5px 1.5px at 37% 12%,#fff,transparent),
+ radial-gradient(1px 1px at 51% 41%,#fff9,transparent),radial-gradient(1px 1px at 64% 8%,#fffc,transparent),radial-gradient(1.5px 1.5px at 78% 33%,#fff,transparent),
+ radial-gradient(1px 1px at 89% 71%,#fffa,transparent),radial-gradient(1px 1px at 14% 88%,#fff9,transparent),radial-gradient(1px 1px at 58% 92%,#fffb,transparent),
+ radial-gradient(1px 1px at 96% 12%,#fff,transparent),radial-gradient(1px 1px at 44% 78%,#fff8,transparent),radial-gradient(1px 1px at 3% 48%,#fffa,transparent)}
+@keyframes twinkle{from{opacity:.45}to{opacity:1}}
+.dest-top{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.dest-head{max-width:860px}
+.dest-title{font-size:clamp(2rem,5.2vw,4.4rem);font-weight:700;line-height:1.05;letter-spacing:.1em;margin:.2em 0 .35em}
+.dest-sub{font-size:clamp(1rem,1.25vw,1.15rem);max-width:660px;margin:0}
+.missions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2vw,28px)}
+.mcard{--acc:var(--blue);position:relative;display:flex;flex-direction:column;text-align:left;padding:0;overflow:hidden;
+ border:1px solid #ffffff1f;background:linear-gradient(180deg,#ffffff0f,#ffffff03);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+ transition:transform .4s cubic-bezier(.2,.8,.2,1),border-color .4s,box-shadow .4s}
+.m-mars{--acc:var(--orange)}.m-jupiter{--acc:#f2cf9b}
+.mcard:hover,.mcard:focus-visible{transform:translateY(-6px);border-color:var(--acc);outline:none;
+ box-shadow:0 0 0 1px var(--acc),0 24px 70px -24px var(--acc)}
+.mvis{position:relative;display:grid;place-items:center;height:clamp(160px,24vh,280px);overflow:hidden;border-bottom:1px solid #ffffff14;background:
+ radial-gradient(ellipse 70% 60% at 50% 115%,color-mix(in srgb,var(--acc) 28%,transparent),transparent 70%),
+ radial-gradient(1px 1px at 12% 22%,#fffa,transparent),radial-gradient(1px 1px at 84% 18%,#fff8,transparent),radial-gradient(1px 1px at 70% 80%,#fff7,transparent),
+ radial-gradient(1px 1px at 26% 76%,#fff6,transparent),radial-gradient(1px 1px at 50% 10%,#fff9,transparent),#02040a}
+.planet{position:relative;height:72%;aspect-ratio:1;border-radius:50%;transition:transform .9s cubic-bezier(.2,.8,.2,1);
+ box-shadow:inset -26px -18px 46px rgba(0,0,0,.92),inset 6px 4px 16px rgba(255,255,255,.2),0 0 60px -10px var(--acc)}
+.mcard:hover .planet,.mcard:focus-visible .planet{transform:scale(1.07) rotate(-5deg)}
+.m-earth .planet{background:
+ radial-gradient(ellipse 34% 7% at 46% 28%,#ffffffb5,transparent 70%),radial-gradient(ellipse 26% 6% at 64% 72%,#ffffff8c,transparent 70%),
+ radial-gradient(ellipse 16% 22% at 34% 48%,#3f9a5f 0 60%,transparent 72%),radial-gradient(ellipse 20% 13% at 64% 46%,#348652 0 55%,transparent 72%),
+ radial-gradient(ellipse 12% 16% at 52% 80%,#3a8a55 0 50%,transparent 72%),radial-gradient(circle at 35% 30%,#5db2ff,#1d62bd 55%,#08254f)}
+.m-mars .planet{background:
+ radial-gradient(ellipse 30% 9% at 50% 5%,#fff 0 55%,transparent 72%),radial-gradient(ellipse 26% 9% at 40% 56%,#7a2c14b0,transparent 70%),
+ radial-gradient(ellipse 14% 8% at 68% 38%,#8a3818a8,transparent 70%),radial-gradient(ellipse 18% 6% at 58% 74%,#6e2610a0,transparent 70%),
+ radial-gradient(circle at 35% 30%,#ffa067,#c9562b 55%,#5a1f0c)}
+.m-jupiter .planet{background:
+ radial-gradient(ellipse 13% 7% at 62% 63%,#c4552f 0 60%,#c4552f00 75%),
+ repeating-linear-gradient(176deg,#ecd8b6 0 7%,#c8976a 7% 11%,#f4e7d0 11% 17%,#a9764e 17% 20%,#e3caa3 20% 27%)}
+.m-earth .planet::before,.m-jupiter .planet::before{content:"";position:absolute;width:9%;aspect-ratio:1;border-radius:50%;left:-22%;top:16%;
+ background:#d9d9d9;box-shadow:inset -3px -2px 4px #000c}
+.mbody{display:flex;flex-direction:column;gap:14px;flex:1;padding:clamp(18px,2vw,28px)}
+.mtop{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}
+.diff{display:inline-flex;align-items:center;gap:4px;color:var(--acc);font-weight:600}
+.diff i{width:16px;height:4px;background:#ffffff26}
+.diff i:nth-of-type(3){margin-right:6px}
+.d1 i:nth-of-type(1),.d2 i:nth-of-type(-n+2),.d3 i{background:var(--acc)}
+.mname{font-size:clamp(1.25rem,1.7vw,1.7rem);font-weight:700;text-transform:uppercase;letter-spacing:.1em;line-height:1.15}
+.mgoal{flex:1;color:#c9c9c9;line-height:1.55}
+.mstats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:14px 0;border-block:1px solid #ffffff14}
+.mstats span{display:flex;flex-direction:column;gap:3px;font-size:1.1rem;font-weight:600}
+.mstats em{font-style:normal;font-weight:400;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mut)}
+.mcta{display:flex;justify-content:space-between;align-items:center;padding:13px 16px;border:1px solid #ffffff40;font-size:.8rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+ transition:background .3s,color .3s,border-color .3s}
+.mcta span{transition:transform .3s}
+.mcard:hover .mcta,.mcard:focus-visible .mcta{background:var(--acc);border-color:var(--acc);color:#000}
+.mcard:hover .mcta span,.mcard:focus-visible .mcta span{transform:translateX(5px)}
+.rise{animation:rise .8s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(var(--i,0) * .12s)}
+@keyframes rise{from{opacity:0;transform:translateY(28px)}}
+@media(max-width:980px){.missions{grid-template-columns:1fr}.mcard{flex-direction:row}
+ .mvis{height:auto;width:clamp(130px,32%,280px);flex-shrink:0;border-bottom:0;border-right:1px solid #ffffff14}.planet{height:auto;width:68%}}
+@media(max-width:560px){.mcard{flex-direction:column}.mvis{width:auto;height:170px;border-right:0;border-bottom:1px solid #ffffff14}.planet{width:auto;height:70%}}
+@media(prefers-reduced-motion:reduce){.rise,.dest::after{animation:none}.mcard,.planet,.mcta,.mcta span{transition:none}}
 @media(max-width:860px){.layout{grid-template-columns:1fr}.dash{position:static}}
 </style>
 </head>
@@ -253,6 +320,7 @@ const $app = document.getElementById("app");
 const fmt = n => Math.round(n).toLocaleString();
 const esc = s => String(s).replace(/[&<>"']/g, c => `&#${c.charCodeAt(0)};`); // player-typed text goes into innerHTML
 const owner = key => { const i = ROLES.findIndex(r => r.owns.includes(key)); return S.players > 1 ? `<span class="badge">${esc(S.names[i % S.players])} · ${ROLES[i].name}</span>` : ""; };
+const LEVEL = { Easy: 1, Medium: 2, Hard: 3 }; // difficulty bars on mission cards
 const newDesign = scen => ({ scen, orbit: SCEN[scen].orbits[0].id, structure: "std", power: "solS", battery: "batS", computer: "cpu", adcs: "adB", comms: "lga", launch: "med", inst: [] });
 
 function stats(o, capKey) {
@@ -304,12 +372,28 @@ const SCREENS = {
     </div>`,
 
   scen: () => `
-    <h2>Choose your mission</h2>
-    <div class="grid">${Object.entries(SCEN).map(([k, s]) => `
-      <button class="opt" data-act="scen" data-v="${k}"><b>${s.name}</b><span class="badge" style="margin:0;width:max-content">${s.diff}</span>
-      <small>${s.goal}</small><span class="st">Budget $${s.budget}M · Science target ${s.target.sci} · ${s.target.years} years</span></button>`).join("")}
-    </div>
-    <div class="row" style="margin-top:20px"><button class="btn ghost" data-act="go" data-v="setup">← Back</button></div>`,
+    <section class="dest">
+      <div class="dest-top">
+      <header class="dest-head rise">
+        <div class="kick">Step 02 · Mission selection</div>
+        <h2 class="dest-title">Choose your destination</h2>
+        <p class="mut dest-sub">Every world presents a different challenge. Choose your mission, manage your resources, and make decisions that determine the success of your exploration.</p>
+      </header>
+      <button class="btn ghost rise" style="--i:1" data-act="go" data-v="setup">← Back</button>
+      </div>
+      <div class="missions">${Object.entries(SCEN).map(([k, s], i) => `
+        <button class="mcard m-${k} rise" style="--i:${i + 1}" data-act="scen" data-v="${k}">
+          <span class="mvis" aria-hidden="true"><span class="planet"></span></span>
+          <span class="mbody">
+            <span class="mtop"><span>${s.where}</span><span class="diff d${LEVEL[s.diff]}"><i></i><i></i><i></i>${s.diff}</span></span>
+            <b class="mname">${s.name}</b>
+            <span class="mgoal">${s.goal}</span>
+            <span class="mstats"><span><em>Budget</em>$${s.budget}M</span><span><em>Science target</em>${s.target.sci}</span><span><em>Duration</em>${s.target.years} yrs</span></span>
+            <span class="mcta">Select mission <span aria-hidden="true">→</span></span>
+          </span>
+        </button>`).join("")}
+      </div>
+    </section>`,
 
   design: () => {
     const d = S.d, s = SCEN[d.scen], r = compute(d), o = r.o;
