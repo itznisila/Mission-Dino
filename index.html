@@ -43,11 +43,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .mk{position:absolute;left:0;top:0;width:18px;height:18px;border:1px solid currentColor;font-size:.7rem;display:inline-flex;align-items:center;justify-content:center}
 .mk.ok{background:#fff;color:#000;border-color:#fff}.mk.warn{color:var(--mut)}.mk.bad{color:#fff}
 input{background:#000;border:1px solid var(--mut);color:var(--txt);border-radius:0;padding:10px;font:inherit}
-.hero{min-height:100vh;min-height:100svh;margin:calc(-1 * var(--top)) calc(-1 * var(--gut)) 0;display:flex;flex-direction:column;justify-content:center;border:0;padding:40px var(--gut);
- background:radial-gradient(circle at 85% 110%,#3a3a3a 0,#111 28%,transparent 29%),radial-gradient(circle at 85% 110%,#ffffff22 29%,transparent 30%)}
 .kick{color:var(--mut);letter-spacing:.3em;text-transform:uppercase;font-size:.85rem}
-.steps{border-top:1px solid var(--line);margin-top:40px;padding-top:24px}
-.steps .card{border:0;border-left:1px solid var(--line);padding:4px 20px;margin:0}
 .ship{width:14px;height:90px;background:linear-gradient(#fff 0 80%,#969696 80%);display:inline-block;position:relative;animation:up 2.6s ease-in forwards}
 .ship:after{content:"";position:absolute;left:3px;top:90px;width:8px;height:40px;background:linear-gradient(#fff,transparent);opacity:.8}
 @keyframes up{0%{transform:translateY(0)}20%{transform:translateY(4px)}100%{transform:translateY(-460px)}}
@@ -62,7 +58,7 @@ main:has(>.dest){display:flex;flex-direction:column}
  radial-gradient(ellipse 70% 40% at 50% 112%,#5aa9ff2e,transparent 70%),
  radial-gradient(ellipse 45% 35% at 92% 0%,#ff8c4214,transparent 70%),
  radial-gradient(ellipse 40% 40% at 0% 30%,#5aa9ff0d,transparent 70%),#000}
-.dest::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;animation:twinkle 6s ease-in-out infinite alternate;background:
+.dest::after,.lhero::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;animation:twinkle 6s ease-in-out infinite alternate;background:
  radial-gradient(1px 1px at 8% 18%,#fff,transparent),radial-gradient(1px 1px at 23% 62%,#fffb,transparent),radial-gradient(1.5px 1.5px at 37% 12%,#fff,transparent),
  radial-gradient(1px 1px at 51% 41%,#fff9,transparent),radial-gradient(1px 1px at 64% 8%,#fffc,transparent),radial-gradient(1.5px 1.5px at 78% 33%,#fff,transparent),
  radial-gradient(1px 1px at 89% 71%,#fffa,transparent),radial-gradient(1px 1px at 14% 88%,#fff9,transparent),radial-gradient(1px 1px at 58% 92%,#fffb,transparent),
@@ -121,6 +117,96 @@ main:has(>.dest){display:flex;flex-direction:column}
  .mvis{height:auto;width:clamp(130px,32%,280px);flex-shrink:0;border-bottom:0;border-right:1px solid #ffffff14}.planet{height:auto;width:68%}}
 @media(max-width:560px){.mcard{flex-direction:column}.mvis{width:auto;height:170px;border-right:0;border-bottom:1px solid #ffffff14}.planet{width:auto;height:70%}}
 @media(prefers-reduced-motion:reduce){.rise,.dest::after{animation:none}.mcard,.planet,.mcta,.mcta span{transition:none}}
+/* ---------- Landing ---------- */
+.land{margin:calc(-1 * var(--top)) calc(-1 * var(--gut)) calc(-1 * var(--top))}
+.lhero{position:relative;isolation:isolate;overflow:hidden;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;padding:0 var(--gut) clamp(22px,4vh,40px)}
+.lhero::before{content:"";position:absolute;inset:0;z-index:-2;pointer-events:none;background:
+ linear-gradient(90deg,#000 0%,#000d 26%,#0007 50%,transparent 72%),linear-gradient(0deg,#000 0,transparent 26%),linear-gradient(180deg,#000b 0,transparent 20%)}
+.lhero::after{z-index:-4}
+.lmoon{position:absolute;z-index:-3;top:50%;right:-9vw;width:min(106vh,74vw);aspect-ratio:1;translate:0 -50%}
+.lmoon img{display:block;width:100%;height:100%;object-fit:cover;mix-blend-mode:screen;filter:contrast(1.12) brightness(1.04);animation:drift 50s ease-in-out infinite alternate}
+@keyframes drift{from{transform:scale(1) rotate(0)}to{transform:scale(1.05) rotate(-5deg)}}
+.lmoon::before{content:"";position:absolute;inset:9%;border-radius:50%;z-index:-1;box-shadow:0 0 140px 20px #5aa9ff1f}
+.lmoon::after{content:"";position:absolute;inset:0;border-radius:50%;pointer-events:none;background:radial-gradient(circle at 72% 28%,transparent 34%,#000a 58%,#000 76%)}
+.lmoon.nofoto::before{background:radial-gradient(ellipse 22% 16% at 40% 36%,#0003,transparent 70%),radial-gradient(ellipse 18% 14% at 58% 58%,#00000029,transparent 70%),radial-gradient(circle at 66% 30%,#0000002e 0 3%,transparent 4%),radial-gradient(circle at 48% 72%,#00000024 0 2.5%,transparent 3.5%),radial-gradient(circle at 62% 35%,#e2e2e2,#9a9a9a 45%,#2a2a2a 80%)}
+.lnav{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:22px 0;border-bottom:1px solid #ffffff1a}
+.brand{display:flex;align-items:center;gap:12px;font-weight:700;font-size:.95rem;letter-spacing:.34em;text-transform:uppercase}
+.brand i{width:9px;height:9px;border-radius:50%;background:var(--blue);box-shadow:0 0 14px var(--blue)}
+.lnav-links{display:flex;gap:clamp(16px,2.6vw,40px)}
+.lnav-links button{position:relative;background:none;border:0;padding:6px 0;color:#bdbdbd;font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;transition:color .3s}
+.lnav-links button::after{content:"";position:absolute;inset:auto 0 0;height:1px;background:var(--blue);transform:scaleX(0);transform-origin:left;transition:transform .35s}
+.lnav-links button:hover,.lnav-links button:focus-visible{color:#fff}.lnav-links button:hover::after,.lnav-links button:focus-visible::after{transform:scaleX(1)}
+.btn.sm{padding:10px 20px;font-size:.74rem}
+.btn.solid{background:#fff;color:#000}.btn.solid:hover{background:var(--blue);border-color:var(--blue)}
+.kick.acc{display:flex;align-items:center;gap:14px;color:var(--blue)}.kick.acc::before{content:"";width:38px;height:1px;background:currentColor}
+.lhero-copy{flex:1;display:flex;flex-direction:column;justify-content:center;max-width:min(780px,100%);padding:clamp(40px,8vh,96px) 0}
+.lhero h1{font-size:clamp(2.6rem,6.2vw,6.6rem);line-height:.98;letter-spacing:.05em;margin:.3em 0 .4em}
+.lhero h1 em{font-style:normal;color:var(--blue)}
+.lhero-lead{font-size:clamp(1rem,1.3vw,1.2rem);color:#cfcfcf;max-width:560px;margin:0 0 34px}
+.lhero-meta{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-top:18px;border-top:1px solid #ffffff1a;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mut)}
+.cue{display:flex;align-items:center;gap:12px}.cue::after{content:"";width:1px;height:28px;background:linear-gradient(var(--blue),transparent);animation:cue 2.2s ease-in-out infinite}
+@keyframes cue{0%,100%{transform:scaleY(.4);transform-origin:top}50%{transform:scaleY(1)}}
+.lsec{position:relative;padding:clamp(64px,11vh,130px) var(--gut);border-top:1px solid #ffffff12}
+.lsec.glow{background:radial-gradient(ellipse 60% 50% at 100% 0%,#5aa9ff12,transparent 70%)}
+.lhead{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:clamp(28px,5vh,56px)}
+.lhead h2{font-size:clamp(1.9rem,4vw,3.6rem);font-weight:700;line-height:1.05;letter-spacing:.08em;margin:.35em 0 0;max-width:900px}
+.lhead p{max-width:440px;margin:0;color:var(--mut)}
+.ph{position:relative;overflow:hidden;background:radial-gradient(ellipse at 70% 20%,#5aa9ff1a,transparent 60%),linear-gradient(160deg,#0b1220,#000)}
+.ph img,.fcard>img,.lcta>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.fgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,1.8vw,24px)}
+.fcard{--acc:var(--blue);position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;gap:12px;min-height:clamp(420px,62vh,600px);padding:clamp(20px,2.2vw,32px);
+ text-align:left;border:1px solid #ffffff1f;background:#05070c;transition:translate .5s cubic-bezier(.2,.8,.2,1),border-color .4s,box-shadow .4s}
+.fcard>img{z-index:-2}
+.fcard::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#0000 15%,#000b 55%,#000 100%)}
+.fcard:hover,.fcard:focus-visible{translate:0 -6px;border-color:var(--acc);outline:none;box-shadow:0 0 0 1px var(--acc),0 30px 80px -30px var(--acc)}
+.fcard:hover>img,.fcard:focus-visible>img,.ncard:hover .ph img{transform:scale(1.06)}
+.fcard .mtop{color:#bdbdbd}.fcard .mgoal{flex:0;color:#d4d4d4}
+.fcard:hover .mcta,.fcard:focus-visible .mcta{background:var(--acc);border-color:var(--acc);color:#000}
+.fcard:hover .mcta span,.fcard:focus-visible .mcta span{transform:translateX(5px)}
+.sgrid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(12px,1.4vw,20px)}
+.stile{display:flex;flex-direction:column;align-items:center;gap:16px;padding:clamp(20px,2vw,30px) 16px;text-align:center;border:1px solid #ffffff14;background:linear-gradient(180deg,#ffffff0a,#ffffff02);transition:translate .4s,border-color .4s}
+.stile:hover{translate:0 -4px;border-color:#ffffff3d}
+.sorb{display:grid;place-items:center;width:100%;height:clamp(110px,14vw,170px)}
+.sorb img{max-width:100%;max-height:100%;object-fit:contain;mix-blend-mode:screen;transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+.stile:hover .sorb img{transform:scale(1.08) rotate(-4deg)}
+.sorb.nofoto::before{content:"";height:70%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#888,#222 70%)}
+.stile b{font-size:1.05rem;letter-spacing:.18em;text-transform:uppercase}
+.sfacts{display:grid;gap:8px;width:100%;margin:0;padding-top:14px;border-top:1px solid #ffffff14}
+.sfacts div{display:flex;justify-content:space-between;gap:8px;font-size:.82rem}
+.sfacts dt{color:var(--mut);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;align-self:center}.sfacts dd{margin:0;font-weight:600}
+.stag{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}
+button.stag{background:none;border:1px solid var(--blue);color:var(--blue);padding:7px 12px;transition:background .3s,color .3s}
+button.stag:hover{background:var(--blue);color:#000}
+.ngrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,1.8vw,24px)}
+.ncard{display:flex;flex-direction:column;border:1px solid #ffffff14;background:#050505;transition:translate .4s,border-color .4s}
+.ncard:hover{translate:0 -4px;border-color:#ffffff40}
+.ncard .ph{aspect-ratio:16/10}
+.nbody{display:flex;flex-direction:column;gap:12px;flex:1;padding:clamp(18px,1.8vw,26px)}
+.nmeta{display:flex;gap:12px;flex-wrap:wrap;font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mut)}.nmeta b{color:var(--blue);font-weight:600}
+.ncard h3,.apod-txt h3{font-size:clamp(1.05rem,1.3vw,1.25rem);line-height:1.3;letter-spacing:.06em;margin:0}
+.ncard p{flex:1;margin:0;color:#bdbdbd;font-size:.95rem}
+.nlink{align-self:flex-start;padding-bottom:4px;border-bottom:1px solid var(--blue);color:#fff;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;transition:color .3s}
+.nlink:hover{color:var(--blue)}
+.lapod{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);border:1px solid #ffffff14;background:#050505}
+.lapod .ph{min-height:clamp(320px,64vh,720px)}
+.apod-txt{display:flex;flex-direction:column;gap:16px;justify-content:center;padding:clamp(22px,3vw,48px)}
+.apod-txt h3{font-size:clamp(1.4rem,2.2vw,2.2rem);line-height:1.15}
+.apod-txt p{margin:0;color:#bdbdbd;display:-webkit-box;-webkit-line-clamp:9;-webkit-box-orient:vertical;overflow:hidden}
+.apod-txt small{color:var(--mut);letter-spacing:.06em;line-height:1.5}
+.lcta{position:relative;isolation:isolate;overflow:hidden;padding:clamp(100px,20vh,220px) var(--gut);text-align:center;border-top:1px solid #ffffff12}
+.lcta>img{z-index:-2;opacity:.8}
+.lcta::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#000 0,#0009 35%,#0009 70%,#000)}
+.lcta h2{font-size:clamp(2.2rem,6vw,5.6rem);font-weight:700;line-height:1;letter-spacing:.08em;margin:.35em 0}
+.lcta p{max-width:560px;margin:0 auto 34px;color:#cfcfcf}.lcta .kick.acc,.lcta .row{justify-content:center}
+.js-reveal .reveal{opacity:0;transform:translateY(34px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--i,0) * .1s)}
+.js-reveal .reveal.in{opacity:1;transform:none}
+@media(max-width:1180px){.sgrid{grid-template-columns:repeat(3,minmax(0,1fr))}.lapod{grid-template-columns:1fr}.lapod .ph{min-height:0;aspect-ratio:16/10}}
+@media(max-width:900px){.fgrid,.ngrid{grid-template-columns:1fr}.fcard{min-height:440px}.lnav-links{display:none}.ncard{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,3fr)}.ncard .ph{aspect-ratio:auto;min-height:100%}}
+@media(max-width:760px){.lmoon{top:clamp(80px,11vh,120px);right:50%;translate:50% 0;width:min(96vw,60vh)}
+ .lhero::before{background:linear-gradient(0deg,#000 0 34%,#000c 56%,transparent 82%),linear-gradient(180deg,#000b 0,transparent 20%)}.lhero-copy{justify-content:flex-end;padding-bottom:28px}}
+@media(max-width:600px){.sgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.ncard{display:flex}.ncard .ph{aspect-ratio:16/10;min-height:0}.lhero-meta .cue{display:none}}
+@media(prefers-reduced-motion:reduce){.lmoon img,.lhero::after,.cue::after{animation:none}.js-reveal .reveal{opacity:1;transform:none;transition:none}
+ .fcard,.stile,.ncard,.ph img,.fcard>img,.sorb img{transition:none}}
 @media(max-width:860px){.layout{grid-template-columns:1fr}.dash{position:static}}
 </style>
 </head>
@@ -344,20 +430,134 @@ function bar(label, val, max, unit, higherBetter) {
   return `<div class="bar"><div class="lab"><span>${label}</span><span class="${!higherBetter && r > 1 ? "over" : ""}">${!higherBetter && r > 1 ? "OVER · " : ""}${unit(val)} / ${max ? unit(max) : "—"}</span></div><div class="trk"><div class="fil" style="width:${Math.min(100, r * 100)}%;background:${col}"></div></div></div>`;
 }
 
+// ---------- Landing page content (images from the NASA Image and Video Library, public domain) ----------
+const NASA_IMG = (id, size) => `https://images-assets.nasa.gov/image/${id}/${id}~${size}.jpg`;
+const pic = (id, alt, size) => `<img src="${NASA_IMG(id, size)}" alt="${alt}" loading="lazy" decoding="async" onerror="this.parentNode.classList.add('nofoto');this.remove()">`;
+const MOON = "GSFC_20171208_Archive_e001861"; // LRO full Moon
+const MISSION_IMG = { earth: "art002e000192", mars: "PIA24542", jupiter: "PIA21778" };
+// Facts: NASA Planetary Fact Sheet (mean distance, surface gravity, length of day)
+const WORLDS = [
+  { n: "Moon", id: MOON, f: [["From Earth", "384,400 km"], ["Gravity", "1.6 m/s²"], ["Day", "29.5 days"]] },
+  { n: "Earth", id: "GSFC_20171208_Archive_e001788", f: [["From Sun", "149.6M km"], ["Gravity", "9.8 m/s²"], ["Day", "24 h"]], play: 1 },
+  { n: "Mars", id: "PIA00407", f: [["From Sun", "227.9M km"], ["Gravity", "3.7 m/s²"], ["Day", "24.6 h"]], play: 1 },
+  { n: "Jupiter", id: "PIA04866", f: [["From Sun", "778.5M km"], ["Gravity", "24.8 m/s²"], ["Day", "9.9 h"]], play: 1 },
+  { n: "Saturn", id: "PIA06193", f: [["From Sun", "1,432M km"], ["Gravity", "10.4 m/s²"], ["Day", "10.7 h"]] },
+  { n: "Neptune", id: "PIA01492", f: [["From Sun", "4,495M km"], ["Gravity", "11.2 m/s²"], ["Day", "16.1 h"]] }
+];
+const NEWS = [
+  { tag: "Artemis II", date: "Apr 6, 2026", img: "art002e015231", src: "art002e015231", title: "Artemis II crew photographs Earth from the Moon's far side",
+    text: "Flying around the Moon, the four Artemis II astronauts captured a thin crescent Earth above the far-side horizon, the first crewed lunar flight since Apollo 17 in 1972." },
+  { tag: "Perseverance", date: "Sep 10, 2025", img: "PIA26344", src: "PIA26640", title: "Mars rock 'Cheyava Falls' holds a potential biosignature",
+    text: "A sample drilled by the Perseverance rover contains vivianite and greigite, minerals often linked to microbial activity on Earth. Scientists call it a potential sign of past life, not proof." },
+  { tag: "Europa Clipper", date: "Oct 14, 2024", img: "KSC-20241014-PH-SPX01_0004", src: "KSC-20241014-PH-SPX01_0004", title: "Europa Clipper launches toward Jupiter's icy moon",
+    text: "A Falcon Heavy sent NASA's largest planetary spacecraft on its way to Europa, to study whether the ocean under its ice could support life. Arrival is planned for 2030." }
+];
+// NASA image of the day: live APOD feed, archive image if the API is down or rate-limited
+let APOD = null;
+const APOD_FALLBACK = { title: "Cosmic Cliffs in the Carina Nebula", date: "2022-07-12", credit: "NASA, ESA, CSA, STScI (James Webb Space Telescope)",
+  img: NASA_IMG("carina_nebula", "large"), link: "https://images.nasa.gov/details/carina_nebula",
+  explanation: "Webb's infrared camera revealed hundreds of newborn stars hidden in this star-forming region about 7,600 light-years away. The 'mountains' are walls of gas and dust carved by radiation from young, hot stars." };
+const apodHTML = () => { const a = APOD || APOD_FALLBACK; return `
+  <div class="lapod" id="apod">
+    <div class="ph"><img src="${esc(a.img)}" alt="${esc(a.title)}" loading="lazy" decoding="async" onerror="this.remove()"></div>
+    <div class="apod-txt">
+      <div class="nmeta"><b>${APOD ? "Astronomy Picture of the Day" : "From the NASA archive"}</b><span>${esc(a.date)}</span></div>
+      <h3>${esc(a.title)}</h3>
+      <p>${esc(a.explanation)}</p>
+      <small>Credit: ${esc(a.credit)}${APOD ? "" : "<br>Live picture of the day unavailable right now, showing an archive favourite."}</small>
+      <a class="nlink" href="${esc(a.link)}" target="_blank" rel="noopener">View on NASA ↗</a>
+    </div>
+  </div>`; };
+function loadApod() {
+  if (!window.fetch) return;
+  fetch("https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&thumbs=true").then(r => r.ok ? r.json() : Promise.reject(r.status)).then(d => {
+    const img = d.media_type === "image" ? d.url : d.thumbnail_url;
+    if (!/^https:\/\//.test(img || "") || !/^\d{4}-\d\d-\d\d$/.test(d.date)) return;
+    APOD = { title: d.title, date: d.date, img, explanation: d.explanation, credit: (d.copyright || "NASA").trim(),
+      link: `https://apod.nasa.gov/apod/ap${d.date.slice(2).replace(/-/g, "")}.html` };
+    const el = document.getElementById("apod"); if (el) el.outerHTML = apodHTML();
+  }).catch(() => {});
+}
+
 // ---------- Screens ----------
 const SCREENS = {
   home: () => `
-    <section class="hero">
-      <div class="kick">NASA Space Apps Challenge 2026</div>
-      <h1>Mission<br>Dino</h1>
-      <p class="mut" style="max-width:560px;font-size:1.1rem">Design a space mission from idea to operations. Every choice costs mass, power, data or money. There is no perfect answer, only trade-offs.</p>
-      <div class="row" style="margin-top:20px"><button class="btn" data-act="go" data-v="setup">Start mission</button></div>
-      <div class="grid steps">
-        <div class="card"><h3>01 / Goal</h3><p class="mut">Earth, Mars or Jupiter, each with its own budget and science target.</p></div>
-        <div class="card"><h3>02 / Design &amp; launch</h3><p class="mut">Orbit, power, comms, instruments and rocket. Pass the launch review.</p></div>
-        <div class="card"><h3>03 / Operate</h3><p class="mut">Survive storms, failures and surprises. Read your mission report.</p></div>
-      </div>
-    </section>`,
+    <div class="land">
+      <section class="lhero">
+        <div class="lmoon"><img src="${NASA_IMG(MOON, "orig")}" alt="The full Moon photographed by NASA's Lunar Reconnaissance Orbiter, showing craters and dark maria" decoding="async" fetchpriority="high"
+          onerror="if(!this.dataset.r){this.dataset.r=1;this.src=this.src.replace('~orig','~large')}else{this.parentNode.classList.add('nofoto');this.remove()}"></div>
+        <nav class="lnav rise" aria-label="Home">
+          <span class="brand"><i aria-hidden="true"></i>Mission Dino</span>
+          <div class="lnav-links">${[["l-missions", "Missions"], ["l-solar", "Solar system"], ["l-news", "Discoveries"], ["l-apod", "Image of the day"]].map(([id, t]) => `<button data-act="jump" data-v="${id}">${t}</button>`).join("")}</div>
+          <button class="btn sm" data-act="go" data-v="setup">Play</button>
+        </nav>
+        <div class="lhero-copy">
+          <div class="kick acc rise" style="--i:1">Explore beyond Earth</div>
+          <h1 class="rise" style="--i:2">The universe is <em>yours</em> to explore.</h1>
+          <p class="lhero-lead rise" style="--i:3">Discover distant worlds, explore extraordinary missions, and experience the science behind humanity's journey into space.</p>
+          <div class="row rise" style="--i:4"><button class="btn solid" data-act="go" data-v="setup">Start exploring</button><button class="btn" data-act="jump" data-v="l-missions">Discover missions</button></div>
+        </div>
+        <div class="lhero-meta rise" style="--i:5"><span>NASA Space Apps Challenge 2026</span><span class="cue">Scroll</span><span>Image: NASA / GSFC / Lunar Reconnaissance Orbiter</span></div>
+      </section>
+
+      <section class="lsec glow" id="l-missions">
+        <div class="lhead reveal"><div><div class="kick acc">01 · Featured missions</div><h2>Pick a world. Build the mission.</h2></div>
+          <p>Three playable missions, each with its own budget, science target and dangers. Every choice costs mass, power, data or money.</p></div>
+        <div class="fgrid">${Object.entries(SCEN).map(([k, s], i) => `
+          <button class="fcard m-${k} reveal" style="--i:${i}" data-act="go" data-v="setup">
+            <img src="${NASA_IMG(MISSION_IMG[k], "medium")}" alt="" loading="lazy" decoding="async" onerror="this.remove()">
+            <span class="mtop"><span>${s.where}</span><span class="diff d${LEVEL[s.diff]}"><i></i><i></i><i></i>${s.diff}</span></span>
+            <b class="mname">${s.name}</b>
+            <span class="mgoal">${s.goal}</span>
+            <span class="mstats"><span><em>Budget</em>$${s.budget}M</span><span><em>Science target</em>${s.target.sci}</span><span><em>Duration</em>${s.target.years} yrs</span></span>
+            <span class="mcta">Start this mission <span aria-hidden="true">→</span></span>
+          </button>`).join("")}
+        </div>
+      </section>
+
+      <section class="lsec" id="l-solar">
+        <div class="lhead reveal"><div><div class="kick acc">02 · Explore the solar system</div><h2>Worlds within reach</h2></div>
+          <p>Real NASA photographs and key facts. Gravity and distance decide how hard each world is to reach and how much fuel your rocket needs.</p></div>
+        <div class="sgrid">${WORLDS.map((w, i) => `
+          <article class="stile reveal" style="--i:${i}">
+            <div class="sorb">${pic(w.id, `${w.n}, NASA photograph`, "small")}</div>
+            <b>${w.n}</b>
+            <dl class="sfacts">${w.f.map(([t, v]) => `<div><dt>${t}</dt><dd>${v}</dd></div>`).join("")}</dl>
+            ${w.play ? `<button class="stag" data-act="go" data-v="setup">Plan a mission →</button>` : `<span class="stag">Observe only</span>`}
+          </article>`).join("")}
+        </div>
+      </section>
+
+      <section class="lsec glow" id="l-news">
+        <div class="lhead reveal"><div><div class="kick acc">03 · Latest space discoveries</div><h2>News from the frontier</h2></div>
+          <p>Recent milestones from NASA missions, with photos from the NASA Image and Video Library.</p></div>
+        <div class="ngrid">${NEWS.map((n, i) => `
+          <article class="ncard reveal" style="--i:${i}">
+            <div class="ph">${pic(n.img, "", "medium")}</div>
+            <div class="nbody">
+              <div class="nmeta"><b>${n.tag}</b><span>${n.date}</span></div>
+              <h3>${n.title}</h3>
+              <p>${n.text}</p>
+              <a class="nlink" href="https://images.nasa.gov/details/${n.src}" target="_blank" rel="noopener">Read on NASA ↗</a>
+            </div>
+          </article>`).join("")}
+        </div>
+      </section>
+
+      <section class="lsec" id="l-apod">
+        <div class="lhead reveal"><div><div class="kick acc">04 · NASA image of the day</div><h2>Today's view of the cosmos</h2></div>
+          <p>Pulled live from NASA's Astronomy Picture of the Day.</p></div>
+        <div class="reveal">${apodHTML()}</div>
+      </section>
+
+      <section class="lcta">
+        ${pic("art002e012632", "", "large")}
+        <div class="kick acc reveal">05 · Begin your mission</div>
+        <h2 class="reveal" style="--i:1">Your mission starts now</h2>
+        <p class="reveal" style="--i:2">Build a team, choose a destination, design your spacecraft and survive whatever space throws at you.</p>
+        <div class="row reveal" style="--i:3"><button class="btn solid" data-act="go" data-v="setup">Begin your mission</button></div>
+      </section>
+    </div>`,
 
   setup: () => `
     <div class="card"><h2>Who is on the mission team?</h2>
@@ -501,6 +701,7 @@ function share() {
 // ---------- Actions ----------
 const ACT = {
   go: v => { S.screen = v; },
+  jump: v => { document.getElementById(v)?.scrollIntoView({ behavior: "smooth" }); return false; },
   players: v => { S.players = +v; },
   scen: v => { S.d = newDesign(v); S.screen = "design"; },
   pick: (v, k) => {
@@ -532,7 +733,10 @@ document.addEventListener("input", e => {
   if (e.target.dataset.name) S.names[+e.target.dataset.name] = e.target.value || "Player " + (+e.target.dataset.name + 1);
 });
 
-function render() { $app.innerHTML = SCREENS[S.screen](); }
+// Scroll reveal on the landing page (content stays visible where IntersectionObserver is missing)
+const io = window.IntersectionObserver ? new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { rootMargin: "0px 0px -8% 0px" }) : null;
+if (io) document.documentElement.classList.add("js-reveal");
+function render() { $app.innerHTML = SCREENS[S.screen](); if (io) $app.querySelectorAll(".reveal").forEach(el => io.observe(el)); }
 
 // Load a shared design from the URL, if any
 // Only accept IDs that exist; anything unknown falls back to the default design
@@ -550,6 +754,7 @@ try {
   }
 } catch {}
 render();
+loadApod();
 </script>
 </body>
 </html>
