@@ -8,14 +8,14 @@
 <meta name="ai-assistance" content="Game code written with assistance from an AI model (Claude). Game design, testing and data choices by the team.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#000000;--txt:#ffffff;--mut:#969696;--line:#2b2b2b;--ok:#ffffff;--warn:#969696;--bad:#555555}
+:root{--gut:clamp(16px,4vw,72px);--top:28px;--bg:#000000;--txt:#ffffff;--mut:#969696;--line:#2b2b2b;--ok:#ffffff;--warn:#969696;--bad:#555555}
 *{box-sizing:border-box}
-html{background:var(--bg)}
-body{margin:0;font-family:"D-DIN","Barlow",Arial,Helvetica,sans-serif;color:var(--txt);min-height:100vh;letter-spacing:.02em;
+html{background:var(--bg);overflow-x:clip}
+body{margin:0;font-family:"D-DIN","Barlow",Arial,Helvetica,sans-serif;color:var(--txt);min-height:100vh;min-height:100svh;display:flex;flex-direction:column;overflow-x:clip;letter-spacing:.02em;
  background:radial-gradient(1px 1px at 12% 22%,#fff9,transparent),radial-gradient(1px 1px at 72% 78%,#fff6,transparent),radial-gradient(1px 1px at 42% 58%,#fff5,transparent),radial-gradient(1px 1px at 86% 14%,#fff8,transparent),radial-gradient(1px 1px at 28% 88%,#fff5,transparent),#000}
-main{max-width:1200px;margin:auto;padding:28px 24px}
+main{flex:1;width:100%;padding:var(--top) var(--gut)}
 h1,h2,h3,.btn,.badge,.lab,th{text-transform:uppercase;letter-spacing:.12em}
-h1{font-size:clamp(2.4rem,7vw,5rem);font-weight:700;margin:.1em 0;line-height:1}
+h1{font-size:clamp(2.4rem,7vw,8rem);font-weight:700;margin:.1em 0;line-height:1}
 h2{font-size:1.6rem;font-weight:600;margin:.3em 0}h3{font-size:1rem;font-weight:600;margin:.2em 0 .8em}
 p{line-height:1.6}.mut{color:var(--mut)}
 button{font:inherit;color:inherit;cursor:pointer}
@@ -25,13 +25,13 @@ button{font:inherit;color:inherit;cursor:pointer}
 .btn.sel{background:#fff;color:#000}
 .btn:disabled{opacity:.4;cursor:not-allowed}
 .card{background:transparent;border:1px solid var(--line);border-radius:0;padding:24px;margin:16px 0}
-.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr))}
 .opt{text-align:left;background:#000;border:1px solid var(--line);border-radius:0;padding:16px;display:flex;flex-direction:column;gap:8px;transition:border-color .2s,background .2s}
 .opt:hover{border-color:#fff}
 .opt b{text-transform:uppercase;letter-spacing:.08em;font-weight:600}
 .opt.on{background:#fff;color:#000;border-color:#fff}.opt.on small,.opt.on .st{color:#444}
 .opt small{color:var(--mut);line-height:1.45}.st{font-size:.82rem;color:#cfcfcf;letter-spacing:.04em}
-.layout{display:grid;grid-template-columns:1fr 330px;gap:24px;align-items:start}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) clamp(300px,24vw,440px);gap:24px;align-items:start}
 .dash{position:sticky;top:16px;background:#000}
 .bar{margin:14px 0}.bar .lab{display:flex;justify-content:space-between;font-size:.75rem;color:#cfcfcf}
 .bar .trk{height:4px;background:#1c1c1c;margin-top:6px}
@@ -43,7 +43,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .mk{position:absolute;left:0;top:0;width:18px;height:18px;border:1px solid currentColor;font-size:.7rem;display:inline-flex;align-items:center;justify-content:center}
 .mk.ok{background:#fff;color:#000;border-color:#fff}.mk.warn{color:var(--mut)}.mk.bad{color:#fff}
 input{background:#000;border:1px solid var(--mut);color:var(--txt);border-radius:0;padding:10px;font:inherit}
-.hero{min-height:82vh;display:flex;flex-direction:column;justify-content:center;border:0;padding:40px 0;
+.hero{min-height:100vh;min-height:100svh;margin:calc(-1 * var(--top)) calc(-1 * var(--gut)) 0;display:flex;flex-direction:column;justify-content:center;border:0;padding:40px var(--gut);
  background:radial-gradient(circle at 85% 110%,#3a3a3a 0,#111 28%,transparent 29%),radial-gradient(circle at 85% 110%,#ffffff22 29%,transparent 30%)}
 .hero .kick{color:var(--mut);letter-spacing:.3em;text-transform:uppercase;font-size:.85rem}
 .steps{border-top:1px solid var(--line);margin-top:40px;padding-top:24px}
@@ -52,8 +52,8 @@ input{background:#000;border:1px solid var(--mut);color:var(--txt);border-radius
 .ship:after{content:"";position:absolute;left:3px;top:90px;width:8px;height:40px;background:linear-gradient(#fff,transparent);opacity:.8}
 @keyframes up{0%{transform:translateY(0)}20%{transform:translateY(4px)}100%{transform:translateY(-460px)}}
 .big{font-size:clamp(2rem,6vw,3.6rem);font-weight:700;letter-spacing:.08em;text-transform:uppercase}
-footer{color:var(--mut);font-size:.72rem;text-align:center;padding:30px;letter-spacing:.12em;text-transform:uppercase;border-top:1px solid var(--line)}
-table{width:100%;border-collapse:collapse}td,th{padding:10px 6px;border-bottom:1px solid var(--line);text-align:left}
+footer{color:var(--mut);font-size:.72rem;text-align:center;padding:30px var(--gut);letter-spacing:.12em;text-transform:uppercase;border-top:1px solid var(--line)}
+table{width:100%;border-collapse:collapse}td,th{overflow-wrap:anywhere;padding:10px 6px;border-bottom:1px solid var(--line);text-align:left}
 @media(max-width:860px){.layout{grid-template-columns:1fr}.dash{position:static}}
 </style>
 </head>
