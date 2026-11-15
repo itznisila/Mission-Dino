@@ -38,4 +38,8 @@ for (let i = 0; i < r.S.events.length; i++) {
 }
 assert.strictEqual(r.S.screen, "report"); assert.strictEqual(r.S.d.ev.log.length, r.S.events.length);
 r.render(); assert.ok(/Mission report[\s\S]*(FULL SUCCESS|PARTIAL SUCCESS|MISSION FAILED)/.test(r.app.innerHTML) && r.app.innerHTML.includes(r.S.d.ev.log[0][1]));
+// 6. explore page lists all eight planets and shows the selected one
+r = run(""); r.S.screen = "explore"; r.S.planet = "saturn"; r.render();
+assert.ok(r.app.innerHTML.includes("Beyond our world.") && ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"].every(n => r.app.innerHTML.includes(`aria-label="Explore ${n}"`)));
+assert.ok(r.app.innerHTML.includes('class="bpanel xdetail b-over x-saturn"'));
 console.log("all checks passed");

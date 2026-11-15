@@ -431,6 +431,89 @@ button.stag:hover{background:var(--blue);color:#000}
 @media(max-width:640px){.rach.two{grid-template-columns:1fr}.rhero{min-height:460px;justify-content:flex-end}.rhero .rplanet{right:50%;translate:50% 0;top:6%;height:60%}.rhero::before{background:linear-gradient(0deg,#000 0 42%,#0008 70%,transparent)}
  .rscore{position:static;text-align:left;margin-bottom:14px}.rperf,.rach,.rrate{grid-template-columns:1fr}.racts,.racts .row{flex-direction:column;align-items:stretch}.racts .btn{width:100%}}
 @media(prefers-reduced-motion:reduce){.rhero .rplanet img,.rbar .fil{animation:none}}
+/* ---------- Explore space ---------- */
+.xpl{justify-content:flex-start}
+.xsec{margin-top:clamp(36px,6vh,72px)}
+.xsec>.lhead{margin-bottom:clamp(20px,3vh,32px)}
+.xfeat{position:relative;isolation:isolate;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-height:clamp(380px,60vh,620px);border:1px solid #ffffff1f;background:#01030a}
+.xfeat-vis{position:relative;display:grid;place-items:center;overflow:hidden;background:radial-gradient(ellipse 60% 60% at 50% 50%,#ff8c4224,transparent 70%),
+ radial-gradient(1px 1px at 18% 22%,#fffa,transparent),radial-gradient(1px 1px at 80% 16%,#fff8,transparent),radial-gradient(1px 1px at 66% 86%,#fff7,transparent),radial-gradient(1px 1px at 30% 74%,#fff6,transparent)}
+.xfeat-vis img{width:84%;max-height:90%;object-fit:contain;mix-blend-mode:screen;filter:drop-shadow(0 0 60px #ff8c4240);animation:drift 70s ease-in-out infinite alternate}
+.xfeat-vis.nofoto::after{content:"";width:60%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#e8d2bb,#8a5a44 60%,#2a160e)}
+.xfeat-txt{display:flex;flex-direction:column;justify-content:center;gap:18px;padding:clamp(24px,3.4vw,56px);border-left:1px solid #ffffff14;background:linear-gradient(90deg,#03060c,#0a1324)}
+.xfeat-txt h3{margin:0;font-size:clamp(2.2rem,5vw,4.4rem);line-height:1;letter-spacing:.08em}
+.xfeat-txt p{margin:0;color:#cfcfcf;font-size:clamp(1rem,1.2vw,1.12rem)}
+.xtag{align-self:flex-start;padding:7px 12px;border:1px solid var(--orange);color:var(--orange);font-size:.64rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase}
+.xfacts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;margin:0;background:#ffffff14;border:1px solid #ffffff14}
+.xfacts div{display:flex;flex-direction:column;gap:4px;padding:12px 14px;background:#050a14}
+.xfacts dt{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}.xfacts dd{margin:0;font-weight:600}
+.xsrc{color:var(--mut);font-size:.74rem;letter-spacing:.04em}
+.xplanets{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:clamp(8px,1vw,14px)}
+.xp{--acc:var(--blue);display:flex;flex-direction:column;align-items:center;gap:10px;padding:16px 8px 14px;border:1px solid #ffffff14;background:linear-gradient(180deg,#ffffff0a,#ffffff02);text-align:center;
+ transition:translate .35s cubic-bezier(.2,.8,.2,1),border-color .3s,box-shadow .3s}
+.xp:hover,.xp:focus-visible{translate:0 -4px;border-color:#ffffff4d;outline:none}
+.xp.on{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc),0 18px 50px -22px var(--acc)}
+.xp .sorb{height:clamp(64px,7vw,104px)}
+.xp b{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase}
+.xp small{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.x-jupiter img{-webkit-mask-image:radial-gradient(circle closest-side,#000 95%,transparent 100%);mask-image:radial-gradient(circle closest-side,#000 95%,transparent 100%);filter:contrast(1.45) brightness(.92)}
+.xdetail{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);margin-top:clamp(12px,1.4vw,18px);padding:0;overflow:hidden;animation:rise .6s cubic-bezier(.2,.8,.2,1)}
+.xdetail .bvis{min-height:clamp(300px,46vh,500px)}
+.xdetail .bvis img{-webkit-mask-image:none;mask-image:none;filter:contrast(1.3) brightness(.92)}
+.xfeat-vis img{-webkit-mask-image:radial-gradient(circle closest-side,#000 95%,transparent 100%);mask-image:radial-gradient(circle closest-side,#000 95%,transparent 100%)}
+.xdetail.x-jupiter .bvis img{-webkit-mask-image:radial-gradient(circle closest-side,#000 95%,transparent 100%);mask-image:radial-gradient(circle closest-side,#000 95%,transparent 100%)}
+.xdetail .binfo .mname{font-size:clamp(2rem,4vw,3.6rem)}
+.xdisc{padding:14px 16px;border:1px solid #ffffff14;border-left:2px solid var(--orange);background:#ffffff04;color:#cfcfcf;font-size:.92rem;line-height:1.5}
+.xdisc b{display:block;margin-bottom:4px;color:var(--orange);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase}
+.xfactgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(12px,1.4vw,18px)}
+.xfact{display:flex;flex-direction:column;gap:10px;padding:clamp(18px,1.8vw,26px);border:1px solid #ffffff14;background:linear-gradient(180deg,#0a1324d9,#03060cd9);transition:border-color .3s}
+.xfact:hover{border-color:#5aa9ff66}
+.xfact b{font-size:clamp(1.6rem,2.6vw,2.4rem);line-height:1;color:var(--blue);letter-spacing:.03em}
+.xfact p{margin:0;color:#cfcfcf;font-size:.92rem;line-height:1.5}
+.xcols{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(14px,1.6vw,22px);margin-top:clamp(14px,1.6vw,22px)}
+.xsizes{display:flex;align-items:flex-end;justify-content:space-between;gap:6px;min-height:clamp(90px,16vw,200px);padding:10px 0 4px}
+.xsizes div{display:flex;flex-direction:column;align-items:center;gap:8px;flex:1;min-width:0}
+.xsizes i{display:block;width:var(--d);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ffffffd9,var(--c) 45%,#000 100%);box-shadow:0 0 18px -4px var(--c)}
+.xsizes span{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.xtable{width:100%;border-collapse:collapse;font-size:.86rem}
+.xtable th,.xtable td{padding:10px 8px;border-bottom:1px solid #ffffff12;text-align:right;white-space:nowrap}
+.xtable th{font-size:.6rem;font-weight:600;letter-spacing:.18em;color:var(--mut)}
+.xtable th:first-child,.xtable td:first-child{text-align:left;color:#fff;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.xtable tr:hover td{background:#5aa9ff0d}
+.xscroll{overflow-x:auto}
+.xtime{display:grid;gap:0;margin:0;padding:0;list-style:none}
+.xtime li{position:relative;display:grid;grid-template-columns:62px minmax(0,1fr);gap:16px;padding:0 0 18px}
+.xtime li::before{content:"";position:absolute;left:66px;top:6px;bottom:-6px;width:1px;background:#ffffff1f}
+.xtime li:last-child::before{display:none}
+.xtime b{color:var(--blue);font-size:.95rem;letter-spacing:.06em}
+.xtime span{position:relative;padding-left:18px;color:#cfcfcf;font-size:.9rem;line-height:1.5}
+.xtime span::before{content:"";position:absolute;left:-1px;top:6px;width:8px;height:8px;border-radius:50%;background:var(--blue);box-shadow:0 0 10px var(--blue);translate:-50% 0}
+.xgal{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:clamp(200px,26vh,300px);gap:clamp(12px,1.4vw,18px)}
+.xgal a{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;gap:6px;padding:clamp(16px,1.6vw,22px);border:1px solid #ffffff14;color:#fff;text-decoration:none;transition:border-color .4s,box-shadow .4s}
+.xgal a:first-child{grid-column:span 2;grid-row:span 2}
+.xgal a::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,transparent 35%,#000d 80%,#000)}
+.xgal a.ph img{z-index:-2}
+.xgal a:hover,.xgal a:focus-visible{border-color:#5aa9ff80;box-shadow:0 0 0 1px #5aa9ff4d,0 24px 60px -30px var(--blue);outline:none}
+.xgal a:hover img,.xgal a:focus-visible img{transform:scale(1.06)}
+.xgal small{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--blue)}
+.xgal b{font-size:clamp(1rem,1.4vw,1.3rem);letter-spacing:.08em;text-transform:uppercase}
+.xgal a:first-child b{font-size:clamp(1.4rem,2.4vw,2.2rem)}
+.xgal p{margin:0;color:#cfcfcf;font-size:.86rem;line-height:1.45;max-width:640px}
+.xmore{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(12px,1.4vw,18px)}
+.xmore>*{--acc:var(--blue);display:flex;flex-direction:column;gap:12px;padding:clamp(20px,2vw,28px);text-align:left;border:1px solid #ffffff1f;background:linear-gradient(180deg,#ffffff0d,#ffffff03);color:#fff;text-decoration:none;
+ transition:translate .35s cubic-bezier(.2,.8,.2,1),border-color .3s,box-shadow .3s}
+.xmore>.o{--acc:var(--orange)}
+.xmore>*:hover,.xmore>*:focus-visible{translate:0 -4px;border-color:var(--acc);outline:none;box-shadow:0 0 0 1px var(--acc),0 24px 60px -28px var(--acc)}
+.xmore small{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--acc)}
+.xmore b{font-size:1.1rem;letter-spacing:.1em;text-transform:uppercase}
+.xmore p{flex:1;margin:0;color:#bdbdbd;font-size:.9rem;line-height:1.5}
+.xmore .mcta{margin-top:4px}
+.xmore>*:hover .mcta,.xmore>*:focus-visible .mcta{background:var(--acc);border-color:var(--acc);color:#000}
+@media(max-width:1180px){.xplanets{grid-template-columns:repeat(4,minmax(0,1fr))}.xfactgrid,.xmore{grid-template-columns:repeat(2,minmax(0,1fr))}.xcols{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:860px){.xfeat,.xdetail{grid-template-columns:1fr}.xfeat-vis{min-height:320px}.xfeat-txt{border-left:0;border-top:1px solid #ffffff14}.xdetail .bvis{min-height:280px;border-right:0;border-bottom:1px solid #ffffff14}
+ .xgal{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.xplanets{grid-template-columns:repeat(2,minmax(0,1fr))}.xfactgrid,.xmore,.xgal{grid-template-columns:1fr}.xgal a:first-child{grid-column:auto;grid-row:span 2}.xfacts{grid-template-columns:repeat(2,minmax(0,1fr))}.xsizes span{font-size:.5rem;letter-spacing:.06em}}
+@media(prefers-reduced-motion:reduce){.xfeat-vis img,.xdetail{animation:none}.xp,.xmore>*{transition:none}}
 @media(max-width:860px){.layout{grid-template-columns:1fr}.dash{position:static}}
 </style>
 </head>
@@ -663,7 +746,7 @@ const MISSION_IMG = { earth: "art002e000192", mars: "PIA24542", jupiter: "PIA217
 const WORLDS = [
   { n: "Moon", id: MOON, f: [["From Earth", "384,400 km"], ["Gravity", "1.6 m/s²"], ["Day", "29.5 days"]] },
   { n: "Earth", id: "GSFC_20171208_Archive_e001788", f: [["From Sun", "149.6M km"], ["Gravity", "9.8 m/s²"], ["Day", "24 h"]], play: 1 },
-  { n: "Mars", id: "PIA00407", f: [["From Sun", "227.9M km"], ["Gravity", "3.7 m/s²"], ["Day", "24.6 h"]], play: 1 },
+  { n: "Mars", id: "PIA00407", f: [["From Sun", "227.9M km"], ["Gravity", "3.7 m/s²"], ["Day", "24.7 h"]], play: 1 },
   { n: "Jupiter", id: "PIA04866", f: [["From Sun", "778.5M km"], ["Gravity", "24.8 m/s²"], ["Day", "9.9 h"]], play: 1 },
   { n: "Saturn", id: "PIA06193", f: [["From Sun", "1,432M km"], ["Gravity", "10.4 m/s²"], ["Day", "10.7 h"]] },
   { n: "Neptune", id: "PIA01492", f: [["From Sun", "4,495M km"], ["Gravity", "11.2 m/s²"], ["Day", "16.1 h"]] }
@@ -715,6 +798,56 @@ const HINTS = {
   eclipse: { a: ["safe", "A small, certain loss of observing time."], b: ["risk", "Without a big battery, deep drains cost science and lifetime."] }
 };
 
+// ---------- Explore page content ----------
+// Planet facts: NASA Planetary Fact Sheet (mean distance from the Sun, equatorial diameter, length of day, orbital period, mean temperature)
+// and the NASA fact sheet for each planet (equatorial surface gravity, as on the landing page). Distances rounded.
+const PLANETS = [
+  { k: "mercury", n: "Mercury", type: "Rocky planet", img: "PIA15160", by: "MESSENGER", c: "#9c9c9c", dist: "57.9M km", dia: 4879, day: "176 days", year: "88 days", temp: 167, g: 3.7,
+    text: "The smallest planet and the closest to the Sun. With almost no atmosphere to hold in heat, its surface swings between scorching days and freezing nights.",
+    disc: "NASA's MESSENGER orbiter (2011–2015) found water ice hiding in permanently shadowed craters near Mercury's poles." },
+  { k: "venus", n: "Venus", type: "Rocky planet", img: "PIA00271", by: "Magellan radar", c: "#d9a35a", dist: "108.2M km", dia: 12104, day: "117 days", year: "225 days", temp: 464, g: 8.9,
+    text: "Almost the same size as Earth, but a thick carbon dioxide atmosphere traps heat, making it the hottest planet. It also spins backwards, very slowly.",
+    disc: "NASA's Magellan spacecraft (1990–1994) used radar to see through the clouds and mapped 98% of the surface, revealing volcanoes and lava plains." },
+  { k: "earth", n: "Earth", type: "Rocky planet", img: "GSFC_20171208_Archive_e001788", by: "Blue Marble", c: "#4f8fd8", dist: "149.6M km", dia: 12756, day: "24 h", year: "365 days", temp: 15, g: 9.8, play: 1,
+    text: "Our home, and the only world known to have life and liquid water oceans on its surface.",
+    disc: "Landsat satellites have photographed Earth's land surface continuously since 1972, the longest record of our changing planet from space." },
+  { k: "mars", n: "Mars", type: "Rocky planet", img: "PIA00407", by: "Viking", c: "#c9562b", dist: "228M km", dia: 6792, day: "24.7 h", year: "687 days", temp: -65, g: 3.7, play: 1,
+    text: "A cold desert world with Olympus Mons, the largest volcano in the solar system, and clear signs that rivers and lakes once flowed.",
+    disc: "The Perseverance rover is collecting rock samples in Jezero Crater, an ancient lake bed, searching for signs of past microbial life." },
+  { k: "jupiter", n: "Jupiter", type: "Gas giant", img: "PIA22946", by: "Juno", c: "#d8b58c", dist: "778.5M km", dia: 142984, day: "9.9 h", year: "11.9 yrs", temp: -110, g: 24.8, play: 1,
+    text: "The largest planet, more than 11 times wider than Earth. Its Great Red Spot is a storm bigger than our whole planet.",
+    disc: "NASA's Juno orbiter, at Jupiter since 2016, found that the planet's core is large and 'fuzzy' rather than a small, solid ball." },
+  { k: "saturn", n: "Saturn", type: "Gas giant", img: "PIA06193", by: "Cassini", c: "#e3caa3", dist: "1.43B km", dia: 120536, day: "10.7 h", year: "29.4 yrs", temp: -140, g: 10.4,
+    text: "A gas giant with the most spectacular rings in the solar system, made mostly of chunks of ice. It is less dense than water.",
+    disc: "The Cassini mission (2004–2017) discovered jets of water erupting from Saturn's small moon Enceladus, which hides an ocean under its ice." },
+  { k: "uranus", n: "Uranus", type: "Ice giant", img: "PIA18182", by: "Voyager 2", c: "#9fd8dc", dist: "2.87B km", dia: 51118, day: "17.2 h", year: "83.7 yrs", temp: -195, g: 8.9,
+    text: "An ice giant tipped on its side, tilted about 98°, so each pole gets decades of sunlight followed by decades of darkness.",
+    disc: "Voyager 2 is the only spacecraft ever to visit Uranus, flying past in 1986 and discovering 10 new moons." },
+  { k: "neptune", n: "Neptune", type: "Ice giant", img: "PIA01492", by: "Voyager 2", c: "#3f6fd8", dist: "4.5B km", dia: 49528, day: "16.1 h", year: "163.7 yrs", temp: -200, g: 11.2,
+    text: "The farthest planet from the Sun: a dark, cold ice giant whipped by the fastest winds measured in the solar system.",
+    disc: "Neptune was found in 1846 by mathematics: astronomers predicted where it must be from tiny tugs on Uranus's orbit, then spotted it." }
+];
+const GALLERY = [
+  { id: "carina_nebula", t: "Cosmic Cliffs", by: "James Webb Space Telescope · 2022", d: "The edge of a star-forming region in the Carina Nebula, about 7,600 light-years away. Webb's infrared camera revealed hundreds of newborn stars hidden in the dust." },
+  { id: "webb_first_deep_field", t: "Webb's First Deep Field", by: "James Webb Space Telescope · 2022", d: "Thousands of galaxies around the cluster SMACS 0723, whose gravity bends and magnifies light from galaxies far behind it." },
+  { id: "as08-14-2383", t: "Earthrise", by: "Apollo 8 · Dec 24, 1968", d: "The crew of Apollo 8 photographed Earth rising above the Moon's horizon, the first people to see it with their own eyes." },
+  { id: "GSFC_20171208_Archive_e000842", t: "Pillars of Creation", by: "Hubble Space Telescope", d: "Towering columns of gas and dust in the Eagle Nebula, seen in near-infrared light that reveals stars hidden behind and inside them." },
+  { id: "PIA03606", t: "Crab Nebula", by: "Hubble Space Telescope · 2005", d: "The expanding remains of a star that exploded as a supernova, seen from Earth in the year 1054. Assembled from 24 Hubble exposures." },
+  { id: "southern_ring_nebula", t: "Southern Ring Nebula", by: "James Webb Space Telescope · 2022", d: "A dying star shedding its outer layers, shown side by side in near-infrared (left) and mid-infrared (right) light." }
+];
+const planetDetail = () => { const p = PLANETS.find(x => x.k === S.planet) || PLANETS[2]; return `
+  <article class="bpanel xdetail b-over x-${p.k}" id="xdetail" style="--acc:${p.c}">
+    <div class="bvis"><span class="planet" aria-hidden="true"></span>${pic(p.img, `${p.n}, NASA photograph`, "medium")}<span class="bvis-tag">Image · ${p.by}</span></div>
+    <div class="binfo">
+      <span class="mtop"><span>${p.type}</span><span>${PLANETS.indexOf(p) + 1} of 8 from the Sun</span></span>
+      <b class="mname">${p.n}</b>
+      <p class="mgoal">${p.text}</p>
+      <dl class="bfacts">${[["From Sun", p.dist], ["Diameter", fmt(p.dia) + " km"], ["Gravity", p.g + " m/s²"], ["Day", p.day], ["Year", p.year], ["Mean temp", p.temp + " °C"]].map(([t, v]) => `<div><dt>${t}</dt><dd>${v}</dd></div>`).join("")}</dl>
+      <div class="xdisc"><b>Discovery</b>${p.disc}</div>
+      <div class="row">${p.play ? `<button class="btn go" data-act="go" data-v="setup">Plan a mission to ${p.n} →</button>` : ""}<a class="nlink" href="https://science.nasa.gov/${p.k}/" target="_blank" rel="noopener">More on NASA Science ↗</a></div>
+    </div>
+  </article>`; };
+
 // ---------- Screens ----------
 const SCREENS = {
   home: () => `
@@ -724,7 +857,7 @@ const SCREENS = {
           onerror="if(!this.dataset.r){this.dataset.r=1;this.src=this.src.replace('~orig','~large')}else{this.parentNode.classList.add('nofoto');this.remove()}"></div>
         <nav class="lnav rise" aria-label="Home">
           <span class="brand"><i aria-hidden="true"></i>Mission Dino</span>
-          <div class="lnav-links">${[["l-missions", "Missions"], ["l-solar", "Solar system"], ["l-news", "Discoveries"], ["l-apod", "Image of the day"]].map(([id, t]) => `<button data-act="jump" data-v="${id}">${t}</button>`).join("")}</div>
+          <div class="lnav-links">${[["l-missions", "Missions"], ["l-solar", "Solar system"], ["l-news", "Discoveries"], ["l-apod", "Image of the day"]].map(([id, t]) => `<button data-act="jump" data-v="${id}">${t}</button>`).join("")}<button data-act="go" data-v="explore">Explore space</button></div>
           <button class="btn sm" data-act="go" data-v="setup">Play</button>
         </nav>
         <div class="lhero-copy">
@@ -753,7 +886,7 @@ const SCREENS = {
 
       <section class="lsec" id="l-solar">
         <div class="lhead reveal"><div><div class="kick acc">02 · Explore the solar system</div><h2>Worlds within reach</h2></div>
-          <p>Real NASA photographs and key facts. Gravity and distance decide how hard each world is to reach and how much fuel your rocket needs.</p></div>
+          <div><p>Real NASA photographs and key facts. Gravity and distance decide how hard each world is to reach and how much fuel your rocket needs.</p><button class="btn sm" style="margin-top:16px" data-act="go" data-v="explore">Explore all eight planets →</button></div></div>
         <div class="sgrid">${WORLDS.map((w, i) => `
           <article class="stile reveal" style="--i:${i}">
             <div class="sorb">${pic(w.id, `${w.n}, NASA photograph`, "small")}</div>
@@ -925,6 +1058,82 @@ const SCREENS = {
           <div class="row"><button class="btn ghost" data-act="go" data-v="scen">← Mission selection</button><button class="btn go" data-act="go" data-v="design">Start mission →</button></div>
         </div>
       </div>
+    </section>`;
+  },
+
+  explore: () => {
+    const maxD = PLANETS[4].dia;
+    return `
+    <section class="dest xpl">
+      <div class="dest-top">
+        <header class="dest-head rise">
+          <div class="kick">Explore the unknown</div>
+          <h2 class="dest-title">Beyond our world.</h2>
+          <p class="mut dest-sub">Discover the extraordinary worlds, objects, and mysteries of our universe.</p>
+        </header>
+        <div class="row rise" style="--i:1"><button class="btn ghost" data-act="go" data-v="home">← Home</button><button class="btn" data-act="go" data-v="setup">Play</button></div>
+      </div>
+
+      <article class="xfeat rise" style="--i:2">
+        <div class="xfeat-vis">${pic("PIA19952", "Pluto in enhanced color, photographed by NASA's New Horizons", "large")}</div>
+        <div class="xfeat-txt">
+          <span class="xtag">Featured discovery</span>
+          <div class="kick acc">Dwarf planet · Kuiper Belt</div>
+          <h3>Pluto</h3>
+          <p>On July 14, 2015, NASA's New Horizons became the first spacecraft to fly past Pluto. This enhanced-color view shows its bright heart-shaped region, Tombaugh Regio. The heart's western half, Sputnik Planitia, is a vast plain of frozen nitrogen.</p>
+          <dl class="xfacts"><div><dt>From Sun</dt><dd>5.9B km</dd></div><div><dt>Diameter</dt><dd>2,377 km</dd></div><div><dt>Year</dt><dd>248 Earth yrs</dd></div></dl>
+          <div class="row"><a class="nlink" href="https://science.nasa.gov/dwarf-planets/pluto/" target="_blank" rel="noopener">More on NASA Science ↗</a><span class="xsrc">Image: NASA / JHUAPL / SwRI</span></div>
+        </div>
+      </article>
+
+      <section class="xsec" id="x-planets">
+        <div class="lhead reveal"><div><div class="kick acc">Solar system explorer</div><h2>Eight worlds, one Sun</h2></div><p>Select a planet to see its real NASA photograph, key facts and a landmark discovery.</p></div>
+        <div class="xplanets reveal">${PLANETS.map(p => `
+          <button class="xp x-${p.k}${p.k === (S.planet || "earth") ? " on" : ""}" style="--acc:${p.c}" data-act="planet" data-v="${p.k}" aria-label="Explore ${p.n}">
+            <span class="sorb">${pic(p.img, "", "small")}</span><b>${p.n}</b><small>${p.type}</small>
+          </button>`).join("")}
+        </div>
+        ${planetDetail()}
+      </section>
+
+      <section class="xsec">
+        <div class="lhead reveal"><div><div class="kick acc">Interesting facts</div><h2>The solar system by the numbers</h2></div><p>Values from the NASA Planetary Fact Sheet. Distances are averages, rounded.</p></div>
+        <div class="xfactgrid">${[["8 min 20 s", "Time sunlight takes to travel about 150 million km to Earth."], ["243 days", "One spin of Venus lasts longer than its whole year of 225 days."], ["≈1,300", "Number of Earths that could fit inside Jupiter."], ["< water", "Saturn is less dense than water, the only planet that is."]]
+          .map(([b, t], i) => `<div class="xfact reveal" style="--i:${i}"><b>${b}</b><p>${t}</p></div>`).join("")}</div>
+        <div class="xcols">
+          <article class="bpanel reveal">
+            <div class="bh">Sizes <b>to scale</b></div>
+            <div class="xsizes">${PLANETS.map(p => `<div><i style="--d:${Math.max(4, p.dia / maxD * 100)}%;--c:${p.c}"></i><span>${p.n}</span></div>`).join("")}</div>
+            <div class="bsub">Planetary characteristics</div>
+            <div class="xscroll"><table class="xtable"><tr><th>Planet</th><th>From Sun</th><th>Diameter</th><th>Day</th><th>Year</th><th>Mean temp</th></tr>
+              ${PLANETS.map(p => `<tr><td>${p.n}</td><td>${p.dist}</td><td>${fmt(p.dia)} km</td><td>${p.day}</td><td>${p.year}</td><td>${p.temp} °C</td></tr>`).join("")}</table></div>
+          </article>
+          <article class="bpanel reveal" style="--i:1">
+            <div class="bh">Landmark <b>discoveries</b></div>
+            <ol class="xtime">${[["1610", "Galileo discovers four large moons orbiting Jupiter."], ["1781", "William Herschel discovers Uranus, the first planet found with a telescope."], ["1846", "Neptune is found where mathematics predicted it would be."], ["1930", "Clyde Tombaugh discovers Pluto."], ["1995", "The first planet orbiting another Sun-like star, 51 Pegasi b, is found."], ["2012", "Voyager 1 becomes the first spacecraft to enter interstellar space."], ["2015", "New Horizons flies past Pluto."]]
+              .map(([y, t]) => `<li><b>${y}</b><span>${t}</span></li>`).join("")}</ol>
+          </article>
+        </div>
+      </section>
+
+      <section class="xsec">
+        <div class="lhead reveal"><div><div class="kick acc">Space gallery</div><h2>Views from our telescopes</h2></div><p>Iconic images from the NASA Image and Video Library. Select one to see it in full.</p></div>
+        <div class="xgal">${GALLERY.map((g, i) => `
+          <a class="ph reveal" style="--i:${i % 3}" href="https://images.nasa.gov/details/${g.id}" target="_blank" rel="noopener">
+            ${pic(g.id, "", i ? "medium" : "large")}<small>${g.by}</small><b>${g.t}</b><p>${g.d}</p>
+          </a>`).join("")}
+        </div>
+      </section>
+
+      <section class="xsec">
+        <div class="lhead reveal"><div><div class="kick acc">Explore more</div><h2>Keep discovering</h2></div></div>
+        <div class="xmore">
+          <button class="reveal" data-act="go" data-v="setup"><small>In this game</small><b>Plan a mission</b><p>Design a spacecraft for Earth, Mars or Jupiter and see if it survives.</p><span class="mcta">Start <span aria-hidden="true">→</span></span></button>
+          <a class="o reveal" style="--i:1" href="https://eyes.nasa.gov/apps/solar-system/" target="_blank" rel="noopener"><small>NASA's Eyes</small><b>Fly through the solar system</b><p>A real-time 3D view of planets, moons and spacecraft, built from NASA data.</p><span class="mcta">Open ↗</span></a>
+          <a class="reveal" style="--i:2" href="https://apod.nasa.gov/apod/" target="_blank" rel="noopener"><small>Every day</small><b>Astronomy Picture of the Day</b><p>A new image of the universe, explained by a professional astronomer.</p><span class="mcta">Open ↗</span></a>
+          <a class="o reveal" style="--i:3" href="https://images.nasa.gov/" target="_blank" rel="noopener"><small>Archive</small><b>NASA Image Library</b><p>Search NASA's public archive of images, videos and audio from more than 60 years of exploration.</p><span class="mcta">Open ↗</span></a>
+        </div>
+      </section>
     </section>`;
   },
 
@@ -1202,6 +1411,7 @@ function share() {
 // ---------- Actions ----------
 const ACT = {
   go: v => { S.screen = v; },
+  planet: v => { S.planet = v; document.querySelectorAll(".xp").forEach(b => b.classList.toggle("on", b.dataset.v === v)); const el = document.getElementById("xdetail"); if (el) el.outerHTML = planetDetail(); return false; },
   jump: v => { document.getElementById(v)?.scrollIntoView({ behavior: "smooth" }); return false; },
   players: v => { S.players = +v; },
   scen: v => { S.d = newDesign(v); S.screen = "brief"; },
